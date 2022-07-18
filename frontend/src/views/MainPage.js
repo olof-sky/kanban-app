@@ -10,7 +10,7 @@ const [projectList,setProjectList]=useState([]);
 let history = useNavigate();
 
 useEffect(()=>{
-  Axios.get("http://localhost:3002/api/project/get").then((data)=>{
+  Axios.get("http://localhost:3002/api/v1/project/get").then((data)=>{
     setProjectList(data.data)
   });
 },[])

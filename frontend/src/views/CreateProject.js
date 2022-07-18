@@ -8,7 +8,7 @@ const [projectName,setProjectName] = useState("");
 const [type,setType] = useState("");
 
 const submitProject = () => {
-Axios.post('http://localhost:3002/api/project/create', {projectName: projectName, type: type})
+Axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectName, type: type})
 }
   return (
     <div className="CreateProject">
