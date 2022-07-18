@@ -11,7 +11,7 @@ Current APIs listed below
 
 ##### Create
 - Project
-  - [] /api/project/create
+  - [ ] /api/project/create
 - Task
   - [ ] /api/task/create
 - User
