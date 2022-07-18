@@ -11,7 +11,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a href="/">Main Page</a>
+        <a href="/mainpage">Main Page</a>
         <a href="/createproject">Create Project</a>
       </header>
     </div>
