@@ -11,7 +11,7 @@ Current APIs listed below
 
 ##### Create
 - Project
-  - [x] /api/project/create
+  - [] /api/project/create
 - Task
   - [ ] /api/task/create
 - User
@@ -21,17 +21,17 @@ Current APIs listed below
 
 ##### Read
 - Project
-  - [x] /api/project/getAll
-  - [ ] /api/project/getFromId/:id
+  - [x] /api/project/getMultiple
+  - [x] /api/project/getFromId/:id
 - Task
-  - [ ] /api/task/getAll
+  - [ ] /api/task/getMultiple
   - [ ] /api/task/getFromId/:id
 - User
-  - [ ] /api/user/getAll
+  - [ ] /api/user/getMultiple
   - [ ] /api/user/getFromId:id
   - [ ] /api/user/getFromName:
 - Group
-  - [ ] /api/group/getAll
+  - [ ] /api/group/getMultiple
   - [ ] /api/group/getFromId:id
 
 ##### Update
