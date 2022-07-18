@@ -1,5 +1,7 @@
 import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+// import Project from './views/Project'
 
 function App() {
   return (
@@ -9,17 +11,10 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <a href="/">Main Page</a>
+        <a href="/createproject">Create Project</a>
       </header>
     </div>
   );
 }
-
 export default App;
