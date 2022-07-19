@@ -36,8 +36,8 @@ Current APIs listed below
 
 ##### Update
 - Project
-  - [ ] /api/v1/project/updateProjectName/:id.
-  - [ ] /api/v1/project/updateProjectType/:id.
+  - [x] /api/v1/project/updateProjectName/:id.
+  - [x] /api/v1/project/updateProjectType/:id.
 - Task
   - [ ] /api/v1/project/updateTaskName/:id.
   - [ ] /api/v1/project/updateTaskStatus/:id.
