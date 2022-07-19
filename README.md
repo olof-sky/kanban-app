@@ -15,7 +15,7 @@ Current APIs listed below
 - Task
   - [ ] /api/v1/task/create
 - User
-  - [ ] /api/v1/user/create
+  - [x] /api/v1/user/create
 - Group
   - [ ] /api/v1/group/create
 
@@ -27,9 +27,10 @@ Current APIs listed below
   - [ ] /api/v1/task/getMultiple
   - [ ] /api/v1/task/getFromId/:id
 - User
-  - [ ] /api/v1/user/getMultiple
-  - [ ] /api/v1/user/getFromId/:id
-  - [ ] /api/v1/user/getFromName:
+  - [x] /api/v1/user/getMultiple
+  - [x] /api/v1/user/getFromId/:id
+  - [x] /api/v1/user/getFromFirstName:
+  - [x] /api/v1/user/getFromLastName:
 - Group
   - [ ] /api/v1/group/getMultiple
   - [ ] /api/v1/group/getFromId:id
@@ -42,7 +43,8 @@ Current APIs listed below
   - [ ] /api/v1/project/updateTaskName/:id.
   - [ ] /api/v1/project/updateTaskStatus/:id.
 - User
-  - [ ] /api/v1/user/...
+  - [x] /api/v1/user/updateFirstName
+  - [x] /api/v1/user/updateLastName
 - Group
   - [ ] /api/v1/group/...
 
@@ -52,7 +54,7 @@ Current APIs listed below
 - Task
   - [ ] /api/v1/task/delete/:id
 - User
-  - [ ] /api/v1/user/delete/:id
+  - [x] /api/v1/user/delete/:id
 - Group
   - [ ] /api/v1/group/delete/:id
 
