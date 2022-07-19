@@ -1,11 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
-const  PORT = process.env.PORT || 3002;;
-
-app.use(cors());
-app.use(express.json())
 const projectRouter = require("./api/v1/routes/project");
+const userRouter = require("./api/v1/routes/user");
+const app = express();
+const PORT = process.env.PORT || 3002;;
+
+app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/user", userRouter);
+app.use(cors());
+app.use(express.json({
+  type: 'application/json',
+}))
 app.use(
   express.urlencoded({
     extended: true,
@@ -15,8 +20,6 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "Server alive" });
 });
-
-app.use("/project", projectRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
