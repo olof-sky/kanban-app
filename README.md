@@ -48,7 +48,7 @@ Current APIs listed below
 
 ##### Delete
 - Project
-  - [ ] /api/v1/project/delete/:id
+  - [x] /api/v1/project/delete/:id
 - Task
   - [ ] /api/v1/task/delete/:id
 - User
