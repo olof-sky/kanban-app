@@ -28,7 +28,7 @@ Current APIs listed below
   - [ ] /api/v1/task/getFromId/:id
 - User
   - [ ] /api/v1/user/getMultiple
-  - [ ] /api/v1/user/getFromId:id
+  - [ ] /api/v1/user/getFromId/:id
   - [ ] /api/v1/user/getFromName:
 - Group
   - [ ] /api/v1/group/getMultiple
