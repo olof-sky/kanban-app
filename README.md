@@ -22,18 +22,18 @@ Current APIs listed below
 ##### Read
 - Project
   - [x] /api/v1/project/getMultiple
-  - [x] /api/v1/project/getFromId/:id
+  - [x] /api/v1/project/getById/:id
 - Task
   - [ ] /api/v1/task/getMultiple
-  - [ ] /api/v1/task/getFromId/:id
+  - [ ] /api/v1/task/getById/:id
 - User
   - [x] /api/v1/user/getMultiple
-  - [x] /api/v1/user/getFromId/:id
-  - [x] /api/v1/user/getFromFirstName:
-  - [x] /api/v1/user/getFromLastName:
+  - [x] /api/v1/user/getById/:id
+  - [x] /api/v1/user/getByFirstName:
+  - [x] /api/v1/user/getByLastName:
 - Group
   - [ ] /api/v1/group/getMultiple
-  - [ ] /api/v1/group/getFromId:id
+  - [ ] /api/v1/group/getById:id
 
 ##### Update
 - Project
@@ -43,18 +43,18 @@ Current APIs listed below
   - [ ] /api/v1/project/updateTaskName/:id.
   - [ ] /api/v1/project/updateTaskStatus/:id.
 - User
-  - [x] /api/v1/user/updateFirstName
-  - [x] /api/v1/user/updateLastName
+  - [x] /api/v1/user/updateUserFirstName
+  - [x] /api/v1/user/updateUserLastName
 - Group
   - [ ] /api/v1/group/...
 
 ##### Delete
 - Project
-  - [x] /api/v1/project/delete/:id
+  - [x] /api/v1/project/deleteProject/:id
 - Task
   - [ ] /api/v1/task/delete/:id
 - User
-  - [x] /api/v1/user/delete/:id
+  - [x] /api/v1/user/deleteUser/:id
 - Group
   - [ ] /api/v1/group/delete/:id
 
