@@ -11,50 +11,50 @@ Current APIs listed below
 
 ##### Create
 - Project
-  - [ ] /api/project/create
+  - [x] /api/v1/project/create
 - Task
-  - [ ] /api/task/create
+  - [ ] /api/v1/task/create
 - User
-  - [ ] /api/user/create
+  - [ ] /api/v1/user/create
 - Group
-  - [ ] /api/group/create
+  - [ ] /api/v1/group/create
 
 ##### Read
 - Project
-  - [x] /api/project/getMultiple
-  - [x] /api/project/getFromId/:id
+  - [x] /api/v1/project/getMultiple
+  - [x] /api/v1/project/getFromId/:id
 - Task
-  - [ ] /api/task/getMultiple
-  - [ ] /api/task/getFromId/:id
+  - [ ] /api/v1/task/getMultiple
+  - [ ] /api/v1/task/getFromId/:id
 - User
-  - [ ] /api/user/getMultiple
-  - [ ] /api/user/getFromId:id
-  - [ ] /api/user/getFromName:
+  - [ ] /api/v1/user/getMultiple
+  - [ ] /api/v1/user/getFromId:id
+  - [ ] /api/v1/user/getFromName:
 - Group
-  - [ ] /api/group/getMultiple
-  - [ ] /api/group/getFromId:id
+  - [ ] /api/v1/group/getMultiple
+  - [ ] /api/v1/group/getFromId:id
 
 ##### Update
 - Project
-  - [ ] /api/project/updateProjectName/:id.
-  - [ ] /api/project/updateProjectType/:id.
+  - [ ] /api/v1/project/updateProjectName/:id.
+  - [ ] /api/v1/project/updateProjectType/:id.
 - Task
-  - [ ] /api/project/updateTaskName/:id.
-  - [ ] /api/project/updateTaskStatus/:id.
+  - [ ] /api/v1/project/updateTaskName/:id.
+  - [ ] /api/v1/project/updateTaskStatus/:id.
 - User
-  - [ ] /api/user/...
+  - [ ] /api/v1/user/...
 - Group
-  - [ ] /api/group/...
+  - [ ] /api/v1/group/...
 
 ##### Delete
 - Project
-  - [ ] /api/project/delete/:id
+  - [ ] /api/v1/project/delete/:id
 - Task
-  - [ ] /api/task/delete/:id
+  - [ ] /api/v1/task/delete/:id
 - User
-  - [ ] /api/user/delete/:id
+  - [ ] /api/v1/user/delete/:id
 - Group
-  - [ ] /api/group/delete/:id
+  - [ ] /api/v1/group/delete/:id
 
 #### :pushpin: ToDo
 - Add following
