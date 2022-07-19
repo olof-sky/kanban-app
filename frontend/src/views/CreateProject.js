@@ -5,10 +5,10 @@ import '../App.css'
 function CreatePost() {
 
 const [projectName,setProjectName] = useState("");
-const [type,setType] = useState("");
+const [projectType,setProjectType] = useState("");
 
 const submitProject = () => {
-Axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectName, type: type})
+Axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectName, projectType: projectType})
 }
   return (
     <div className="CreateProject">
@@ -17,9 +17,9 @@ Axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectN
         <input type="text" onChange={(e)=> {
           setProjectName(e.target.value)
         }}/>
-        <label>Type: </label>
+        <label>Project Type: </label>
         <input type="text" onChange={(e)=>{
-          setType(e.target.value)}}/>
+          setProjectType(e.target.value)}}/>
         <button onClick={submitProject}>Submit Project</button>
       </div>
     </div>
