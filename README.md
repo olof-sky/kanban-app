@@ -52,11 +52,11 @@ Current APIs listed below
 - Project
   - [x] /api/v1/project/deleteProject/:id
 - Task
-  - [ ] /api/v1/task/delete/:id
+  - [ ] /api/v1/task/deleteTask/:id
 - User
   - [x] /api/v1/user/deleteUser/:id
 - Group
-  - [ ] /api/v1/group/delete/:id
+  - [ ] /api/v1/group/deleteGroup/:id
 
 #### :pushpin: ToDo
 - Add following
