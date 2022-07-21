@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const user = require('../services/user');
+const UserService = require('./user.service');
 const router = express.Router();
 router.use(cors());
 router.use(express.json({
@@ -21,7 +21,7 @@ curl -H "Content-Type: application/json" -d '{"userFirstName":"xyz","userLastNam
 /* CREATE user. { userFirstName, userLastName } */
 router.post('/create', async function(req, res, next) {
   try {
-    res.json(await user.create(req));
+    res.json(await UserService.create(req.body));
   } catch (err) {
     console.error(`Error while creating user `, err.message);
     next(err);
@@ -31,7 +31,7 @@ router.post('/create', async function(req, res, next) {
 /* GET users. */
 router.get('/getMultiple', async function(req, res, next) {
   try {
-    res.json(await user.getMultiple(req.query.page));
+    res.json(await UserService.getMultiple());
   } catch (err) {
     console.error(`Error while getting users `, err.message);
     next(err);
@@ -40,20 +40,18 @@ router.get('/getMultiple', async function(req, res, next) {
 
 /* GET user by id. */
 router.get('/getById/:id', async function(req, res, next) {
-  let userId = req.params.id;
   try {
-    res.json(await user.getById(userId));
+    res.json(await UserService.getById(req.params.id));
   } catch (err) {
-    console.error(`Error while getting user with id: ${userId} `, err.message);
+    console.error(`Error while getting user with id: ${req.params.id} `, err.message);
     next(err);
   }
 });
 
 /* UPDATE users first name. { userFirstName } */
 router.put('/updateUserFirstName/:id', async function(req, res, next) {
-  let userId = req.params.id;
   try {
-    res.json(await user.updateUserFirstName(req, userId));
+    res.json(await UserService.updateUserFirstName(req.params.id, req.body));
   } catch (err) {
     console.error(`Error while updating user `, err.message);
     next(err);
@@ -62,9 +60,8 @@ router.put('/updateUserFirstName/:id', async function(req, res, next) {
 
 /* UPDATE user last name. { UserLastName } */
 router.put('/updateUserLastName/:id', async function(req, res, next) {
-  let userId = req.params.id;
   try {
-    res.json(await user.updateUserLastName(req, userId));
+    res.json(await UserService.updateUserLastName(req.params.id, req.body));
   } catch (err) {
     console.error(`Error while updating user `, err.message);
     next(err);
@@ -73,9 +70,8 @@ router.put('/updateUserLastName/:id', async function(req, res, next) {
 
 /* DELETE user. */
 router.delete('/deleteUser/:id', async function(req, res, next) {
-  let userId = req.params.id;
   try {
-    res.json(await user.deleteUser(userId));
+    res.json(await UserService.deleteUser(req.params.id));
   } catch (err) {
     console.error(`Error while deleting user `, err.message);
     next(err);
