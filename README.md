@@ -29,19 +29,20 @@ Current APIs listed below
 - User
   - [x] /api/v1/user/getMultiple
   - [x] /api/v1/user/getById/:id
-  - [x] /api/v1/user/getByFirstName:
-  - [x] /api/v1/user/getByLastName:
+  - [x] /api/v1/user/getByFirstName
+  - [x] /api/v1/user/getByLastName
+  - [x] /api/v1/user/getByEmail
 - Group
   - [ ] /api/v1/group/getMultiple
   - [ ] /api/v1/group/getById:id
 
 ##### Update
 - Project
-  - [x] /api/v1/project/updateProjectName/:id.
-  - [x] /api/v1/project/updateProjectType/:id.
+  - [x] /api/v1/project/updateProjectName/:id
+  - [x] /api/v1/project/updateProjectType/:id
 - Task
-  - [ ] /api/v1/project/updateTaskName/:id.
-  - [ ] /api/v1/project/updateTaskStatus/:id.
+  - [ ] /api/v1/project/updateTaskName/:id
+  - [ ] /api/v1/project/updateTaskStatus/:id
 - User
   - [x] /api/v1/user/updateUserFirstName
   - [x] /api/v1/user/updateUserLastName
