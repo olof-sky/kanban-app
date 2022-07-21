@@ -9,6 +9,8 @@ function model(sequelize) {
         project_type: { type: DataTypes.STRING, allowNull: false },
         project_admins: { type: DataTypes.JSON, allowNull: false},
     };
-
-    return sequelize.define('Project', attributes);
+    const options = {
+        timestamps: false,
+    };
+    return sequelize.define('Project', attributes, options);
 }
