@@ -15,13 +15,13 @@ router.use(
 
 /******* 
 Create new user CURL cmd
-curl -H "Content-Type: application/json" -d '{"userFirstName":"xyz","userLastName":"xyz"}' http://localhost:3002/api/v1/user/create 
+curl -H "Content-Type: application/json" -d '{"email":"olof@gmail.com", "password_hash":"olofschylander", "first_name":"Olof", "last_name":"Schylander","role":"User"}' http://localhost:3002/api/v1/user/create
 *******/
 
-/* CREATE user. { userFirstName, userLastName } */
+/* CREATE user. */
 router.post('/create', async function(req, res, next) {
   try {
-    res.json(await UserService.create(req.body));
+    res.json(await UserService.create(req.query));
   } catch (err) {
     console.error(`Error while creating user `, err.message);
     next(err);
@@ -48,20 +48,29 @@ router.get('/getById/:id', async function(req, res, next) {
   }
 });
 
-/* UPDATE users first name. { userFirstName } */
+router.get('/getByEmail', async function(req, res, next) {
+  try {
+    res.json(await UserService.getByEmail(req.query));
+  } catch (err) {
+    console.error(`Error while getting user with email: ${req.query.email} `, err.message);
+    next(err);
+  }
+});
+
+/* UPDATE users first name. */
 router.put('/updateUserFirstName/:id', async function(req, res, next) {
   try {
-    res.json(await UserService.updateUserFirstName(req.params.id, req.body));
+    res.json(await UserService.updateUserFirstName(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating user `, err.message);
     next(err);
   }
 });
 
-/* UPDATE user last name. { UserLastName } */
+/* UPDATE user last name. */
 router.put('/updateUserLastName/:id', async function(req, res, next) {
   try {
-    res.json(await UserService.updateUserLastName(req.params.id, req.body));
+    res.json(await UserService.updateUserLastName(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating user `, err.message);
     next(err);
