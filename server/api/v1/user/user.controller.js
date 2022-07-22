@@ -21,7 +21,8 @@ curl -H "Content-Type: application/json" -d '{"email":"olof@gmail.com", "passwor
 /* CREATE user. */
 router.post('/create', async function(req, res, next) {
   try {
-    res.json(await UserService.create(req.query));
+    const token = await UserService.create(req.query);
+    res.header('auth-token', token).json({token:token, redirect:'/'});
   } catch (err) {
     console.error(`Error while creating user `, err.message);
     next(err);

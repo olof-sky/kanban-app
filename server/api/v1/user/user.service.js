@@ -1,21 +1,24 @@
+require('dotenv').config()
+const jwt = require('jsonwebtoken');
 const db = require('../../../helpers/db');
 const bcrypt = require('bcryptjs');
 const uuid = require("uuid");
 
 // Route for creating a user
-
 async function create(params) {
   // validate
   if (await db.User.findOne({ where: { email: params.email } })) {
       throw 'Email "' + params.email + '" is already registered';
   }
-
-  const user = new db.User({user_id: uuid.v4(), email: params.email, password_hash: params.password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role});
   // hash password
-  user.passwordHash = await bcrypt.hash(params.password, 10);
+  password_hash = await bcrypt.hash(params.password, 10);
 
+  const user_id = uuid.v4();
+  const user = new db.User({user_id: user_id, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role,});
   // save user
   await user.save();
+  const token = jwt.sign({user_id: user_id}, process.env.TOKEN_KEY);
+  return (token)
 }
 
 // Get multiple users
@@ -28,23 +31,26 @@ async function getById(user_id){
   return await getUser(user_id);
 }
 
-async function updateUserFirstName(user_id, first_name) {
+async function getByEmail(params){
+  return await db.User.findOne({ where: { email: params.email } });
+}
+
+async function updateUserFirstName(user_id, params) {
 
   const user = await getUser(user_id);
-  const userFirstNameChanged = first_name;
-
+  const userFirstNameChanged = params.first_name;
   // copy params to user and save
-  Object.assign(user.first_name, userFirstNameChanged);
+  user.update({ first_name: userFirstNameChanged });
   await user.save();
 }
 
-async function updateUserLastName(user_id, last_name) {
+async function updateUserLastName(user_id, params) {
 
   const user = await getUser(user_id);
-  const userLastNameChanged = last_name;
+  const userLastNameChanged = params.last_name;
 
   // copy params to user and save
-  Object.assign(user.last_name, userLastNameChanged);
+  user.update({ last_name: userLastNameChanged });
   await user.save();
 }
 
@@ -64,6 +70,7 @@ module.exports = {
   create,
   getMultiple,
   getById,
+  getByEmail,
   updateUserFirstName,
   updateUserLastName,
   deleteUser,

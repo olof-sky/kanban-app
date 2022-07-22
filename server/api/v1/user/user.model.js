@@ -10,7 +10,6 @@ function model(sequelize) {
         first_name: { type: DataTypes.STRING, allowNull: false },
         last_name: { type: DataTypes.STRING, allowNull: false },
         role: { type: DataTypes.STRING, allowNull: false },
-        token: { type: DataTypes.STRING, allowNull: false }
     };
 
     const options = {
