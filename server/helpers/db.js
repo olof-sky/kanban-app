@@ -25,21 +25,10 @@ async function initialize() {
     as: "user",
     foreignKey: "project_id"
   })
+  
   // sync all models with database
   await sequelize.sync({ alter: true });
 }
 
 module.exports = db = {};
 initialize();
-
-// async function query(sql, params) {
-//   const connection = await mysql.createConnection(config.db);
-//   const [results, ] = await connection.execute(sql, params);
-
-//   return results;
-// }
-
-
-// module.exports = {
-//   query
-// }

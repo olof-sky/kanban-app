@@ -51,7 +51,7 @@ router.get('/getById/:id', async function(req, res, next) {
 /* UPDATE project name. { projectName } */
 router.put('/updateProjectName/:id', async function(req, res, next) {
   try {
-    res.json(await project.updateProjectName(req.params.id, req.body));
+    res.json(await project.updateProjectName(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating project `, err.message);
     next(err);
@@ -61,7 +61,7 @@ router.put('/updateProjectName/:id', async function(req, res, next) {
 /* UPDATE project type. { projectType } */
 router.put('/updateProjectType/:id', async function(req, res, next) {
   try {
-    res.json(await project.updateProjectType(req.params.id, req.body));
+    res.json(await project.updateProjectType(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating project `, err.message);
     next(err);

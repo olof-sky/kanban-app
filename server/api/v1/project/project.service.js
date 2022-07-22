@@ -21,28 +21,28 @@ async function getById(project_id){
   return await getproject(project_id);
 }
 
-async function updateProjectName(project_id, project_name) {
+async function updateProjectName(project_id, params) {
 
   const project = await getproject(project_id);
-  const projectNameChanged = project_name;
+  const projectNameChanged = params.project_name;
 
   // copy params to project and save
-  Object.assign(project.project_name, projectNameChanged);
+  project.update({ project_name: projectNameChanged });
   await project.save();
 }
 
-async function updateProjectType(project_id, project_type) {
+async function updateProjectType(project_id, params) {
 
   const project = await getproject(project_id);
-  const projectTypeChanged = project_type;
+  const projectTypeChanged = params.project_type;
 
   // copy params to project and save
-  Object.assign(project.project_type, projectTypeChanged);
+  project.update({ project_type: projectTypeChanged });
   await project.save();
 }
 
 // Delete a project
-async function deleteproject(project_id) {
+async function deleteProject(project_id) {
   const project = await getproject(project_id);
   await project.destroy();
 }
@@ -59,5 +59,5 @@ module.exports = {
   getById,
   updateProjectName,
   updateProjectType,
-  deleteproject,
+  deleteProject,
 }
