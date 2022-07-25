@@ -4,19 +4,19 @@ import '../App.css'
 
 function MainPage() {
 
-const [projectList,setProjectList] = useState([]);
+const [userList,setUserList] = useState([]);
 
   useEffect(()=>{
-     Axios.get("http://localhost:3002/api/v1/project/getMultiple").then((res)=>{
-      setProjectList(res.data.data)
+     Axios.get("http://localhost:3002/api/v1/user/getMultiple").then((res)=>{
+      setUserList(res.data)
     });
   },[])
 
-  if (!projectList) return null;
+  if (!userList) return null;
 
   return (
-    projectList.map(function(item, i){
-      return <h1 key={i}>{item.project_name}</h1>
+    userList.map(function(item, i){
+      return <h1 key={i}>{item.first_name}</h1>
       }
     )
   );
