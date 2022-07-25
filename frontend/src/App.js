@@ -12,6 +12,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a href="/mainpage">Main Page</a>
+        <a href="/login">Login</a>
         <a href="/createproject">Create Project</a>
       </header>
     </div>

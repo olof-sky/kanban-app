@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from './App';
 import CreateProject from './views/CreateProject';
 import MainPage from './views/MainPage';
+import Login from './views/Login';
 
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -16,6 +17,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/mainpage" element={<MainPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/createproject" element={<CreateProject />} />
         </Routes>
       </BrowserRouter>
