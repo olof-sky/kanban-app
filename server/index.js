@@ -7,7 +7,7 @@ const userRouter = require("./api/v1/user/user.controller");
 const authRouter = require('./middleware/auth');
 const secureRouter = require('./middleware/secure');
 const app = express();
-const PORT = process.env.PORT || 3002;;
+const PORT = process.env.PORT || 3002;
 
 app.use(errorHandler);
 app.use("/api/v1/project", projectRouter);
@@ -24,9 +24,9 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.json({ message: "Server alive" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Server alive" });
+// });
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on localhost:${PORT}`)
