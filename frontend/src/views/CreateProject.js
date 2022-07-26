@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import Axios from 'axios'
+import axios from 'axios'
 import '../App.css'
 
 function CreatePost() {
@@ -8,7 +8,7 @@ const [projectName,setProjectName] = useState("");
 const [projectType,setProjectType] = useState("");
 
 const submitProject = () => {
-Axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectName, projectType: projectType})
+axios.post('http://localhost:3002/api/v1/project/create', {projectName: projectName, projectType: projectType})
 }
   return (
     <div className="CreateProject">
