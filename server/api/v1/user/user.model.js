@@ -10,17 +10,20 @@ function model(sequelize) {
         first_name: { type: DataTypes.STRING, allowNull: false },
         last_name: { type: DataTypes.STRING, allowNull: false },
         role: { type: DataTypes.STRING, allowNull: false },
+        refresh_token: { type: DataTypes.STRING, allowNull: true },
     };
 
     const options = {
         timestamps: false,
         defaultScope: {
             // exclude password hash by default
-            attributes: { exclude: ['password_hash'] }
+            attributes: { exclude: ['password_hash', 'refresh_token'] },
         },
         scopes: {
             // include hash with this scope
-            withHash: { attributes: {}, }
+            withHash: { attributes: { exclude: ['refresh_token']}, },
+            withRefreshToken: { attributes: { exclude: ['password_hash'] }, },
+            withAll: { attributes: { }, },
         }
     };
 

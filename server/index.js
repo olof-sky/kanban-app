@@ -13,7 +13,7 @@ app.use(errorHandler);
 app.use("/api/v1/project", projectRouter);
 app.use("/api/v1/user", userRouter);
 app.use('/api/auth', authRouter); 
-app.use('/api/secure', secureRouter); 
+app.use('/', secureRouter); 
 app.use(cors());
 app.use(express.json({
   type: 'application/json',

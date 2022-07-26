@@ -12,13 +12,11 @@ async function create(params) {
   }
   // hash password
   password_hash = await bcrypt.hash(params.password, 10);
-
+  const refreshToken = jwt.sign({user_id: user_id}, process.env.REFRESH_TOKEN_KEY);
   const user_id = uuid.v4();
-  const user = new db.User({user_id: user_id, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role,});
+  const user = new db.User({user_id: user_id, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role, refresh_token: refreshToken});
   // save user
   await user.save();
-  const token = jwt.sign({user_id: user_id}, process.env.TOKEN_KEY);
-  return (token)
 }
 
 // Get multiple users

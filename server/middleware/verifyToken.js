@@ -1,16 +1,15 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
-module.exports = function(req, res, next) {
-    const token = req.headers.authorization;
-    if (token) { token.replace('Bearer ', '') };
-    if(!token) {
-        return res.status(401).json('Access Denided');
-    }
-    console.log(jwt.verify(token, process.env.TOKEN_KEY))
-    try {
-        const verified = jwt.verify(token, process.env.TOKEN_KEY);
-        req.user = verified;
-    } catch (error) {
-        res.status(400).json('Invalid Token');
-    }
+module.exports = async function(req, res, next) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.replace('Bearer ', '');
+  if(!token) {
+    return res.status(401).json('Access Denided');
+  }
+  jwt.verify(token, process.env.TOKEN_KEY, async (error, user) => {
+    if (error) res.status(400).json('Invalid Token');
+    res.user = await db.User.scope('withHash').findByPk(user.user_id);
+    next();
+  })
 };

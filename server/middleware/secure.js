@@ -8,7 +8,7 @@ router.use(cors({
   }))
 
 router.get('/', verify, (req, res) => {
-    res.json({ message: "Secured" });
+  res.json({ Secured });
 });
 
 module.exports = router;
