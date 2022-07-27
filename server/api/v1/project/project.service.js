@@ -3,12 +3,21 @@ const uuid = require("uuid");
 
 // Route for creating a project
 
-async function create(params) {
-  console.log(params)
-  const project = new db.Project({project_id: uuid.v4(), project_name: params.project_name, project_type: params.project_type, project_admins: params.project_admins});
-  console.log(project)
+async function create(params, userId) {
+  const projectId = uuid.v4() 
+  const project = new db.Project({
+    project_id: projectId, 
+    project_name: params.project_name, 
+    project_type: params.project_type, 
+    project_admins: params.project_admins
+  });
   // save project
+  const userProject = new db.User_Projects({
+    user_id: userId,
+    project_id: projectId, 
+  });
   await project.save();
+  await userProject.save();
 }
 
 // Get multiple projects
