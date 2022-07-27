@@ -7,7 +7,7 @@ router.use(cors({
     credentials: true,
   }))
 
-router.get('/', verify, (req, res) => {
+router.get('/secure', verify, (req, res) => {
   res.json({ Secured });
 });
 
