@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const project = require('./project.service');
+const projectService = require('./project.service');
 const router = express.Router();
+const verifyUserToken = require('../../../middleware/verifyToken');
 router.use(cors());
 router.use(express.json({
   type: 'application/json',
@@ -18,10 +19,10 @@ Create new project CURL cmd
 curl -H "Content-Type: application/json" -d '{"projectName":"xyz","projectType":"xyz"}' http://localhost:3002/api/v1/project/create 
 *******/
 
-/* CREATE project. { projectName, projectType } */
-router.post('/create', async function(req, res, next) {
+/* CREATE project. */
+router.post('/create', verifyUserToken, async function(req, res, next) {
   try {
-    res.json(await project.create(req.body));
+    res.json(await projectService.create(req.body, res.user.user_id));
   } catch (err) {
     console.error(`Error while creating project `, err.message);
     next(err);
@@ -31,7 +32,7 @@ router.post('/create', async function(req, res, next) {
 /* GET projects. */
 router.get('/getMultiple', async function(req, res, next) {
   try {
-    res.json(await project.getMultiple());
+    res.json(await projectService.getMultiple());
   } catch (err) {
     console.error(`Error while getting projects `, err.message);
     next(err);
@@ -41,7 +42,7 @@ router.get('/getMultiple', async function(req, res, next) {
 /* GET project by id. */
 router.get('/getById/:id', async function(req, res, next) {
   try {
-    res.json(await project.getById(req.params.id));
+    res.json(await projectService.getById(req.params.id));
   } catch (err) {
     console.error(`Error while getting project with id: ${projectId} `, err.message);
     next(err);
@@ -51,7 +52,7 @@ router.get('/getById/:id', async function(req, res, next) {
 /* UPDATE project name. { projectName } */
 router.put('/updateProjectName/:id', async function(req, res, next) {
   try {
-    res.json(await project.updateProjectName(req.params.id, req.query));
+    res.json(await projectService.updateProjectName(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating project `, err.message);
     next(err);
@@ -61,7 +62,7 @@ router.put('/updateProjectName/:id', async function(req, res, next) {
 /* UPDATE project type. { projectType } */
 router.put('/updateProjectType/:id', async function(req, res, next) {
   try {
-    res.json(await project.updateProjectType(req.params.id, req.query));
+    res.json(await projectService.updateProjectType(req.params.id, req.query));
   } catch (err) {
     console.error(`Error while updating project `, err.message);
     next(err);
@@ -71,7 +72,7 @@ router.put('/updateProjectType/:id', async function(req, res, next) {
 /* DELETE project. */
 router.delete('/deleteProject/:id', async function(req, res, next) {
   try {
-    res.json(await project.deleteProject(req.params.id));
+    res.json(await projectService.deleteProject(req.params.id));
   } catch (err) {
     console.error(`Error while deleting project `, err.message);
     next(err);
