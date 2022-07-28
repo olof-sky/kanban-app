@@ -7,8 +7,8 @@ router.use(cors({
     credentials: true,
   }))
 
-router.get('/secure', verify, (req, res) => {
-  res.json({ Secured });
+router.get('/', verify, (req, res) => {
+  res.json({ "Secured": true });
 });
 
 module.exports = router;
