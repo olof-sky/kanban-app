@@ -7,6 +7,9 @@ Run npm install in the server directory, you can then run:
 
 Runs the server on [http://localhost:3002](http://localhost:3002)
 
+#### :open_book: About
+Server running on node.js / express. Handles APIs, middleware and security. The application is using MySQL db together with sequelizer in node to implement mapping and access to db objects. API calls are made from the client side React application and objects are returned as json. API structure built using controller, model and service. Calls are made to controller which uses the corresponding service to get items from sequelized instance of the MySQL db. Db is initialized in helpers/db.
+
 #### :lock: Security
 ##### JWT Tokens
 
@@ -77,7 +80,6 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
    - [x] /api/auth/logout
   
 #### :pushpin: ToDo
-- Add following
   - [ ] Update APIs
   - [x] Delete APIs
   - [ ] Project tasks
