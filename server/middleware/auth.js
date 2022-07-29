@@ -21,7 +21,6 @@ router.use(
 );
 
 router.get('/refreshToken', verifyRefresh, async (req, res) => {
-  console.log(req.headers.Authorization)
   const user = await db.User.findByPk(res.user.user_id);
   const refreshToken = generateRefreshToken(user)
   const token = generateAccessToken(user);
@@ -36,8 +35,8 @@ router.get('/refreshToken', verifyRefresh, async (req, res) => {
   .status(200).json({'Success': 'Refreshed', 'redirect': `${process.env.BACKEND_URL}`});
 });
 
-router.put('/logout', verifyRefresh, async (req, res) => {
-  const user = await db.User.findByPk(res.user.user_id);
+router.put('/logout', async (req, res) => {
+  const user = await db.User.findByPk(JSON.parse(req.body.headers.User).user_id);
   setRefreshToken(user, null)
   res.json({'Success': 'Logged out'})
 });
@@ -68,7 +67,7 @@ router.post('/login', async (req, res) => {
 });
 
 function generateAccessToken(user) {
-  return jwt.sign({user_id: user.user_id}, process.env.TOKEN_KEY, { expiresIn: '10m'});
+  return jwt.sign({user_id: user.user_id}, process.env.TOKEN_KEY, { expiresIn: '15m'});
 };
 
 function generateRefreshToken(user) {
@@ -76,7 +75,6 @@ function generateRefreshToken(user) {
 };
 
 async function setRefreshToken(user, refreshToken){
-  console.log(user)
   user.update({ refresh_token: refreshToken });
   await user.save();
 };
