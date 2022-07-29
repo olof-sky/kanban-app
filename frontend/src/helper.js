@@ -11,13 +11,17 @@ export async function refreshToken () {
       sessionStorage.setItem('Refresh-Token', refreshToken);
       axios.defaults.headers.common['Authorization'] = token;
       axios.defaults.headers.common['Refresh-Token'] = refreshToken;
+      console.log("Refreshed token")
     }
   }
-  catch (err) {}
+  catch (err) {
+    console.log(err)
+    window.location = "/";
+  }
 }
 
 export async function isSecure () {
-  axios.get("http://localhost:3002/secure", { headers: { Authorization:sessionStorage.getItem('Token') }})
+  await axios.get("http://localhost:3002/secure", { headers: { Authorization:sessionStorage.getItem('Token') }})
   .then((res) => {
     if (res.status === 200) {
       return true;
