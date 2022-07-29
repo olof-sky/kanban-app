@@ -10,6 +10,21 @@ import './App.css'
 function App() {
   const [loggedIn, logIn] = useState(false);
 
+  // Logout after 15 min if token expired
+  setInterval(async function() {
+    if (!loggedIn) return;
+    try {
+      const response = await axios.get("http://localhost:3002/secure", { headers: { Authorization:sessionStorage.getItem('Token') }})
+      if (response.status === 200) return }
+    catch(err) {
+      logIn(false);
+      sessionStorage.removeItem('Token');
+      sessionStorage.removeItem('Refresh-Token');
+      sessionStorage.removeItem('User');
+      window.location = "/"
+    }
+  }, 1000*60*15);
+
   useEffect(() => {
     getLoggedInUser();
   }, []);
@@ -24,8 +39,10 @@ function App() {
   }
   
   const logout = async () => {
-    const resp = await axios.put('http://localhost:3002/api/auth/logout', { headers: { Authorization:sessionStorage.getItem('Refresh-Token') }})
+    const header = sessionStorage.getItem('User')
+    const resp = await axios.put('http://localhost:3002/api/auth/logout', { headers: { User:header }})
     if (resp) {
+      logIn(false);
       sessionStorage.removeItem('Token');
       sessionStorage.removeItem('Refresh-Token');
       sessionStorage.removeItem('User');
