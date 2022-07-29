@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const verifyUserToken = require('../../../middleware/verifyToken');
 const UserService = require('./user.service');
 const router = express.Router();
 router.use(cors());
@@ -21,20 +22,29 @@ curl -H "Content-Type: application/json" -d '{"email":"olof@gmail.com", "passwor
 /* CREATE user. */
 router.post('/create', async function(req, res, next) {
   try {
-    const token = await UserService.create(req.query);
-    res.header('auth-token', token).json({token:token, redirect:'/'});
+    await UserService.create(req.body);
   } catch (err) {
     console.error(`Error while creating user `, err.message);
-    next(err);
   }
 });
 
 /* GET users. */
-router.get('/getMultiple', async function(req, res, next) {
+router.get('/getMultiple', verifyUserToken, async function(req, res, next) {
+  // Logged in users ID === res.user.user_id
   try {
     res.json(await UserService.getMultiple());
   } catch (err) {
     console.error(`Error while getting users `, err.message);
+    res.status(400).json(`Error while getting users `, err.message);
+  }
+});
+
+/* GET logged in user by id. */
+router.get('/getLoggedInUser', verifyUserToken, async function(req, res, next) {
+  try {
+    res.json(await UserService.getLoggedInUser(res.user.user_id));
+  } catch (err) {
+    console.error(`Error while getting user with id: ${req.params.id} `, err.message);
     next(err);
   }
 });
