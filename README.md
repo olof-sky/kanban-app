@@ -7,8 +7,18 @@ Run npm install in the server directory, you can then run:
 
 Runs the server on [http://localhost:3002](http://localhost:3002)
 
-Current APIs listed below
+#### :open_book: About
+Server running on node.js / express. Handles APIs, middleware and security. The application is using MySQL db together with sequelizer in node to implement mapping and access to db objects. API calls are made from the client side React application and objects are returned as json. API structure built using controller, model and service. Calls are made to controller which uses the corresponding service to get items from sequelized instance of the MySQL db. Db is initialized in helpers/db.
 
+#### :lock: Security
+##### JWT Tokens
+
+The server security is based on refresh tokens/access tokens, where the access token has a lifetime of 15 minutes and gets refreshed by the refresh token on login and api actions. Tokens are stored in session storage on client side. The refreshtoken is also stored in the user object in MySQL db. User IDs are stored inside the tokens. To validate the refresh token, server checks if session storage token and the user token are equal, then return the user object associated with that token. This is to prevent old refresh tokens of being used several times. Refresh tokens are rotated on refresh.
+
+Client side script is run every 15 minutes in App to check whether access token is still valid or not.
+Refreshtokens get deleted from user object in db on logout and sessionstorage is cleaned.
+
+#### :package: APIs
 ##### Create
 - Project
   - [x] /api/v1/project/create
@@ -18,7 +28,7 @@ Current APIs listed below
   - [x] /api/v1/user/create
 - Group
   - [ ] /api/v1/group/create
-
+  
 ##### Read
 - Project
   - [x] /api/v1/project/getMultiple
@@ -28,6 +38,7 @@ Current APIs listed below
   - [ ] /api/v1/task/getById/:id
 - User
   - [x] /api/v1/user/getMultiple
+  - [x] /api/v1/user/getLoggedInUser
   - [x] /api/v1/user/getById/:id
   - [x] /api/v1/user/getByFirstName
   - [x] /api/v1/user/getByLastName
@@ -35,7 +46,7 @@ Current APIs listed below
 - Group
   - [ ] /api/v1/group/getMultiple
   - [ ] /api/v1/group/getById:id
-
+  
 ##### Update
 - Project
   - [x] /api/v1/project/updateProjectName/:id
@@ -48,7 +59,7 @@ Current APIs listed below
   - [x] /api/v1/user/updateUserLastName
 - Group
   - [ ] /api/v1/group/...
-
+  
 ##### Delete
 - Project
   - [x] /api/v1/project/deleteProject/:id
@@ -58,16 +69,24 @@ Current APIs listed below
   - [x] /api/v1/user/deleteUser/:id
 - Group
   - [ ] /api/v1/group/deleteGroup/:id
-
+  
+ ##### Auth
+ - New refresh token
+   - [x] /api/auth/refreshToken
+ - Validate access token 
+   - [x] /api/auth/secure
+ - Login/logout
+   - [x] /api/auth/login
+   - [x] /api/auth/logout
+  
 #### :pushpin: ToDo
-- Add following
   - [ ] Update APIs
-  - [ ] Delete APIs
+  - [x] Delete APIs
   - [ ] Project tasks
-  - [ ] Users
+  - [x] Users
   - [ ] Groups
   - [ ] Roles
-  - [ ] Security
+  - [x] Security
   - [ ] Db mapping
 
 ## :page_facing_up: Frontend
