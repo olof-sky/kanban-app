@@ -12,9 +12,9 @@ async function create(params) {
   }
   // hash password
   password_hash = await bcrypt.hash(params.password, 10);
-  const refreshToken = jwt.sign({user_id: user_id}, process.env.REFRESH_TOKEN_KEY);
-  const user_id = uuid.v4();
-  const user = new db.User({user_id: user_id, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role, refresh_token: refreshToken});
+  const userId = uuid.v4();
+  const refreshToken = jwt.sign({user_id: userId}, process.env.REFRESH_TOKEN_KEY);
+  const user = new db.User({user_id: userId, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role, refresh_token: refreshToken});
   // save user
   await user.save();
 }
@@ -22,6 +22,11 @@ async function create(params) {
 // Get multiple users
 async function getMultiple(){
   return await db.User.findAll();
+}
+
+// Get one user
+async function getLoggedInUser(user_id){
+  return await getUser(user_id);
 }
 
 // Get one user
@@ -67,6 +72,7 @@ async function getUser(user_id) {
 module.exports = {
   create,
   getMultiple,
+  getLoggedInUser,
   getById,
   getByEmail,
   updateUserFirstName,
