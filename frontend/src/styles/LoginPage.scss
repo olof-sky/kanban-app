@@ -1,0 +1,328 @@
+@import './styles.scss';
+
+.login-body {
+  display: grid;
+  justify-items: center;
+  grid-template-areas:
+  'left right';
+  overflow: hidden;
+}
+.login-left-container {
+  display: flex;
+  grid-area: left;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+  .form-card {
+    display: flex;
+    background-color: $main-white;
+    margin: 0 5% 0 15%;
+    width: 550px;
+    height: 750px;
+    border-radius: 25px;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    
+    p {
+      padding: 0;
+      margin: 0;
+      color: red;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin: 0 20% 10% 20%;
+    }
+
+    h2 {
+      font-size: 30px;
+      margin: 0 0 5% 0;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 3% 0 10% 0;
+    }
+
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      
+      input {
+        font-size: 18px;
+        padding-left: 25px;
+        border: 2px solid transparent;
+        background: $input-background;
+        margin-top: 20px;
+        height: 55px;
+        border-radius: 30px;
+      }
+
+      input:focus {
+        border: 2px solid rgb(22, 24, 14);
+        outline: none;
+        background: $input-background-selected;
+      }
+
+      input:focus::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $placeholder-input-selected;
+      }
+      input:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $placeholder-input-selected;
+      }
+      
+      input:focus::-ms-input-placeholder { /* Microsoft Edge */
+        color: $placeholder-input-selected;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin-top: 20px;
+
+      button {
+        font-size: 18px;
+        border: 2px solid rgb(22, 24, 14);
+        background: #fcfcfc;
+        color: rgb(41 44 26);
+        margin-top: 20px;
+        height: 55px;
+        border-radius: 30px;
+      }
+      
+      button:hover, button:focus{
+        cursor: pointer;
+        background: #dddddd;
+        color: #1f140ac9;
+      }
+
+      #sign-btn {
+        background: rgb(41 44 26);
+        color: $main-white;
+      }
+      #sign-btn:hover {
+        background: rgb(22, 24, 14);
+        color: #dadada;
+      }
+      #sign-btn:focus {
+        background: rgb(22, 24, 14);
+      }
+    }
+  }
+}
+.login-right-container {
+  display: flex;
+  flex-direction: row-reverse;
+  grid-area: right;
+  grid-row-start: 1;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  width: 100%;
+  right: 0;
+  
+  #login-image {
+    right: 0;
+    position: relative;
+    height: 100vh;
+    max-height: 1080px;
+    min-height: 800px;
+  }
+}
+
+@include devices(laptop) {
+  .login-left-container {
+    
+    .form-card {
+      margin: 0 5% 0 10%;
+      width: 500px;
+      height: 650px;
+  
+      h1 {
+        font-size: 40px;
+        margin: 0 20% 10% 20%;
+      }
+  
+      h2 {
+        font-size: 30px;
+        margin: 0 0 5% 0;
+      }
+  
+      h3 {
+        font-size: 18px;
+        margin: 3% 0 10% 0;
+      }
+  
+      .inputs {
+        
+        input {
+          height: 50px;
+        }
+      }
+  
+      .buttons {
+        margin-top: 10px;
+  
+        button {
+          height: 50px;
+        }
+      }
+    }
+  }
+}
+
+@include devices(tablet) {
+  .login-body {
+    overflow: none; 
+    display: block;
+    justify-items: center;
+    height: 100%;
+  }
+  
+  .login-left-container {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 750px;
+    
+    .form-card {
+      margin: 0 5% 0 5%;
+      width: 55%;
+      max-height: 80%;
+      min-width: 450px;
+      background: #fffc;
+  
+      h1 {
+        font-size: 35px;
+        margin: 0 20% 10% 20%;
+      }
+  
+      .inputs {
+        width: 70%;
+
+        input {
+          border: 1px solid transparent;
+          height: 45px;
+          border: 1px solid rgb(146, 146, 146);;
+          background: rgb(211 211 211 / 15%);
+        }
+
+        input:focus {
+          border: 1px solid rgb(22, 24, 14);
+        }
+      }
+  
+      .buttons {
+        width: 70%;
+        margin-top: 10px;
+  
+        button {
+          height: 45px;
+          border: 1px solid rgb(22, 24, 14);
+        }
+        
+        button:hover, button:focus{
+          cursor: pointer;
+          background: #dddddd;
+          color: #1f140ac9;
+        }
+      }
+    }
+  }
+
+  .login-right-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    #login-image {
+      top: 0;
+      left: 550px;
+      min-height: 750px;
+    }
+  }
+}
+
+@include devices(mobile) {
+  .login-body {
+    overflow: none; 
+    display: block;
+    justify-items: center;
+    height: 100%;
+  }
+  
+  .login-left-container {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 750px;
+    
+    .form-card {
+      align-self: flex-start;
+      margin: 10% 5% 0 5%;
+      width: 100%;
+      max-height: 80%;
+      background: #fffc;
+  
+      h1 {
+        font-size: 35px;
+        margin: 0 20% 10% 20%;
+      }
+  
+      .inputs {
+        width: 80%;
+        
+        input {
+          border: 1px solid transparent;
+          height: 45px;
+          border: 1px solid rgb(146, 146, 146);;
+          background: rgb(211 211 211 / 15%);
+        }
+  
+        input:focus {
+          border: 1px solid rgb(22, 24, 14);
+        }
+      }
+  
+      .buttons {
+        width: 80%;
+        margin-top: 10px;
+  
+        button {
+          height: 45px;
+          border: 1px solid rgb(22, 24, 14);
+        }
+        
+        button:hover, button:focus{
+          cursor: pointer;
+          background: #dddddd;
+          color: #1f140ac9;
+        }
+      }
+    }
+  }
+
+  .login-right-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    #login-image {
+      top: 0;
+      left: 550px;
+      min-height: 750px;
+    }
+  }
+}
