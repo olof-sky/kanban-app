@@ -80,6 +80,7 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
    - [x] /api/auth/logout
   
 #### :pushpin: ToDo
+  - [ ] Add better error message at login screen
   - [ ] Update APIs
   - [x] Delete APIs
   - [ ] Project tasks
