@@ -1,0 +1,36 @@
+/****** COLORS ******/
+$main-white: #fff;
+$main-background: #f6f6f6; 
+$input-background: #d3d3d32e;
+$input-background-selected: rgba(48, 47, 47, 0.075);
+$placeholder-input-selected: rgba(48, 47, 47, 0.2);
+
+/****** FONTS ******/
+$main-font: sans-serif;
+
+/****** BREAKPOINTS ******/
+@mixin devices ($breakpoint) {
+  @if $breakpoint == laptop {
+      @media only screen and (max-width: 1366px) {
+        @content;
+      }
+    }    
+
+  @if $breakpoint == tablet-portrait {
+    @media only screen and (max-width: 1025px) {
+      @content;
+    }
+  }    
+
+  @if $breakpoint == tablet {    
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  }
+ 
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 481px) {
+      @content;
+    }
+  }  
+}

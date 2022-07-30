@@ -4,8 +4,7 @@ import axios from 'axios';
 import CreateProject from './views/CreateProject';
 import Login from './views/LoginPage';
 import MainPage from './views/MainPage';
-
-import './App.css'
+import './styles/App.scss'
 
 function App() {
   const [loggedIn, logIn] = useState(false);
@@ -30,12 +29,20 @@ function App() {
   }, []);
 
   async function getLoggedInUser() {
-    const response = await axios.get("http://localhost:3002/api/v1/user/getLoggedInUser", { headers: { Authorization:sessionStorage.getItem('Token') }})
-      if (response.status === 200) {
-        sessionStorage.setItem('User', JSON.stringify(response.data));
-        logIn(true);
+    try { 
+      if (sessionStorage.getItem('Token')) {
+        const response = await axios.get("http://localhost:3002/api/v1/user/getLoggedInUser", { headers: { Authorization:sessionStorage.getItem('Token') }})
+        if (response.status === 200) {
+          sessionStorage.setItem('User', JSON.stringify(response.data));
+          logIn(true);
+        }
+        else return false;
       }
-      else return false;
+      else (console.log("No user token found"));
+      }
+    catch(err) {
+      console.log(err)
+    }
   }
   
   const logout = async () => {
