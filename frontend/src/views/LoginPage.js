@@ -15,17 +15,22 @@ const [showRegister,showRegisterForm] = useState(false);
 const [errorMesssage,setErrorMessage] = useState("");
 
 const submit = async () => {
-  const resp = await axios.post('http://localhost:3002/api/auth/login', 
+  try {
+    const resp = await axios.post('http://localhost:3002/api/auth/login', 
     { email: email, password: password }
-  )
-  if (resp) {
-    let token = resp.headers.authorization;
-    let refreshToken = resp.headers['refresh-token'];
-    sessionStorage.setItem('Token', token);
-    sessionStorage.setItem('Refresh-Token', refreshToken);
-    axios.defaults.headers.common['Authorization'] = token;
-    axios.defaults.headers.common['Refresh-Token'] = refreshToken;
-    window.location = "/"
+    )
+    if (resp) {
+      let token = resp.headers.authorization;
+      let refreshToken = resp.headers['refresh-token'];
+      sessionStorage.setItem('Token', token);
+      sessionStorage.setItem('Refresh-Token', refreshToken);
+      axios.defaults.headers.common['Authorization'] = token;
+      axios.defaults.headers.common['Refresh-Token'] = refreshToken;
+      window.location = "/"
+    }
+  }
+  catch(err) {
+    setErrorMessage(err.response.data.Error)
   }
 }
 
@@ -78,6 +83,7 @@ return (
       ) : (
         <div className="form-card">
           <h1>Welcome to Skylan</h1>
+          <p>{errorMesssage}</p>
           <div className="inputs">
             <input required placeholder="Email" type="email" onChange={(e)=> {
               setEmail(e.target.value)}}/>
