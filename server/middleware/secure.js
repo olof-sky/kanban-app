@@ -1,9 +1,10 @@
+require('dotenv').config()
 const router = require('express').Router();
 const verify = require('./verifyToken');
 const cors = require('cors');
 
 router.use(cors({
-    origin: "http://localhost:3000",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   }))
 

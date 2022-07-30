@@ -22,9 +22,10 @@ curl -H "Content-Type: application/json" -d '{"email":"olof@gmail.com", "passwor
 /* CREATE user. */
 router.post('/create', async function(req, res, next) {
   try {
-    await UserService.create(req.body);
+    const response = await UserService.create(req.body, res);
+    return res.status(200).json({"Success": "Successfully created user", response});
   } catch (err) {
-    console.error(`Error while creating user `, err.message);
+    console.log(err, `Error while creating user `);
   }
 });
 

@@ -9,7 +9,8 @@ module.exports = async function(req, res, next) {
   }
   jwt.verify(token, process.env.TOKEN_KEY, async (error, user) => {
     if (error) res.status(400).json('Invalid Token');
-    res.user = await db.User.scope('withHash').findByPk(user.user_id);
+    try { res.user = await db.User.scope('withHash').findByPk(user.user_id); }
+    catch (err) { res.status(400) }  
     next();
   })
 };

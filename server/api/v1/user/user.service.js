@@ -1,22 +1,34 @@
 require('dotenv').config()
+const { body, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const db = require('../../../helpers/db');
 const bcrypt = require('bcryptjs');
 const uuid = require("uuid");
 
 // Route for creating a user
-async function create(params) {
+async function create(params, res) {
   // validate
   if (await db.User.findOne({ where: { email: params.email } })) {
-      throw 'Email "' + params.email + '" is already registered';
+      return res.status(400).json({"response": 'Email ' + params.email + ' is already registered'});
   }
+  if (!body(params.email).isEmail().normalizeEmail()) {
+    return res.status(400).json({"response": 'Email ' + params.email + ' is not valid'});
+  }
+  
+  if (params.first_name === "") { return res.status(400).json({"response": "First name can not be empty"})}
+  if (params.last_name === "") { return res.status(400).json({"response": "Last name can not be empty"})}
+  if (params.email === "") { return res.status(400).json({"response": "Email can not be empty"})}
+  if (params.password === "") { return res.status(400).json({"response": "Password can not be empty"})}
+
   // hash password
   password_hash = await bcrypt.hash(params.password, 10);
+  params.role = "User";
   const userId = uuid.v4();
   const refreshToken = jwt.sign({user_id: userId}, process.env.REFRESH_TOKEN_KEY);
   const user = new db.User({user_id: userId, email: params.email, password_hash: password_hash, first_name: params.first_name, last_name: params.last_name, role: params.role, refresh_token: refreshToken});
   // save user
   await user.save();
+  return user;
 }
 
 // Get multiple users
