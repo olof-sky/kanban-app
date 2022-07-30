@@ -68,7 +68,7 @@
       }
 
       input:focus {
-        border: 2px solid rgb(22, 24, 14);
+        border: 1px solid rgb(22, 24, 14);
         outline: none;
         background: $input-background-selected;
       }
@@ -93,7 +93,7 @@
 
       button {
         font-size: 18px;
-        border: 2px solid rgb(22, 24, 14);
+        border: 1px solid rgb(22, 24, 14);
         background: #fcfcfc;
         color: rgb(41 44 26);
         margin-top: 20px;
@@ -103,6 +103,7 @@
       
       button:hover, button:focus{
         cursor: pointer;
+        border: 2px solid rgb(22, 24, 14);
         background: #dddddd;
         color: #1f140ac9;
       }
@@ -273,6 +274,7 @@
       align-self: flex-start;
       margin: 10% 5% 0 5%;
       width: 100%;
+      min-width: 0px;
       max-height: 80%;
       background: #fffc;
   
