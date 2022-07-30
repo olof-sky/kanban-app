@@ -1,12 +1,30 @@
 /****** COLORS ******/
 $main-white: #fff;
-$main-background: #f6f6f6; 
-$input-background: #d3d3d32e;
+$offset-white: #f6f6f6;
+
+$main-green: rgb(41 44 26);
+$main-dark-green: rgb(22, 24, 14);
+
+$error: red;
+
+// Backgrounds
+$main-background: $offset-white;
+
+// Inputs
+$input-background: rgb(211 211 211 / 15%);
 $input-background-selected: rgba(48, 47, 47, 0.075);
-$placeholder-input-selected: rgba(48, 47, 47, 0.2);
+$input-blurred: rgba(48, 47, 47, 0.2);
+
+//Buttons
+$light-button: #fcfcfc;
+$light-button-selected: #dddddd;
+
+/****** STYLES ******/
+$card-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
 /****** FONTS ******/
 $main-font: sans-serif;
+
 
 /****** BREAKPOINTS ******/
 @mixin devices ($breakpoint) {

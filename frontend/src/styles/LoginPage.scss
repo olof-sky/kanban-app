@@ -29,12 +29,12 @@
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: $card-box-shadow;
     
     p {
       padding: 0;
       margin: 0;
-      color: red;
+      color: $error;
     }
 
     h1 {
@@ -60,7 +60,7 @@
       input {
         font-size: 18px;
         padding-left: 25px;
-        border: 2px solid transparent;
+        border: 1px solid transparent;
         background: $input-background;
         margin-top: 20px;
         height: 55px;
@@ -68,20 +68,20 @@
       }
 
       input:focus {
-        border: 1px solid rgb(22, 24, 14);
+        border: 1px solid $main-dark-green;
         outline: none;
         background: $input-background-selected;
       }
 
       input:focus::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: $placeholder-input-selected;
+        color: $input-blurred;
       }
       input:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: $placeholder-input-selected;
+        color: $input-blurred;
       }
       
       input:focus::-ms-input-placeholder { /* Microsoft Edge */
-        color: $placeholder-input-selected;
+        color: $input-blurred;
       }
     }
 
@@ -93,9 +93,9 @@
 
       button {
         font-size: 18px;
-        border: 1px solid rgb(22, 24, 14);
-        background: #fcfcfc;
-        color: rgb(41 44 26);
+        border: 1px solid $main-dark-green;
+        background: $light-button;
+        color: $main-green;
         margin-top: 20px;
         height: 55px;
         border-radius: 30px;
@@ -103,21 +103,21 @@
       
       button:hover, button:focus{
         cursor: pointer;
-        border: 2px solid rgb(22, 24, 14);
-        background: #dddddd;
-        color: #1f140ac9;
+        border: 2px solid $main-dark-green;
+        background: $light-button-selected;
+        color: $main-dark-green;
       }
 
       #sign-btn {
-        background: rgb(41 44 26);
+        background: $main-green;
         color: $main-white;
       }
       #sign-btn:hover {
-        background: rgb(22, 24, 14);
-        color: #dadada;
+        background: $main-dark-green;
+        color: $offset-white
       }
       #sign-btn:focus {
-        background: rgb(22, 24, 14);
+        background: $main-dark-green;
       }
     }
   }
@@ -213,14 +213,8 @@
         width: 70%;
 
         input {
-          border: 1px solid transparent;
           height: 45px;
-          border: 1px solid rgb(146, 146, 146);;
-          background: rgb(211 211 211 / 15%);
-        }
-
-        input:focus {
-          border: 1px solid rgb(22, 24, 14);
+          border: 1px solid $input-blurred
         }
       }
   
@@ -230,13 +224,6 @@
   
         button {
           height: 45px;
-          border: 1px solid rgb(22, 24, 14);
-        }
-        
-        button:hover, button:focus{
-          cursor: pointer;
-          background: #dddddd;
-          color: #1f140ac9;
         }
       }
     }
@@ -287,14 +274,7 @@
         width: 80%;
         
         input {
-          border: 1px solid transparent;
           height: 45px;
-          border: 1px solid rgb(146, 146, 146);;
-          background: rgb(211 211 211 / 15%);
-        }
-  
-        input:focus {
-          border: 1px solid rgb(22, 24, 14);
         }
       }
   
@@ -304,13 +284,6 @@
   
         button {
           height: 45px;
-          border: 1px solid rgb(22, 24, 14);
-        }
-        
-        button:hover, button:focus{
-          cursor: pointer;
-          background: #dddddd;
-          color: #1f140ac9;
         }
       }
     }
