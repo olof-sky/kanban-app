@@ -7,7 +7,8 @@ const userRouter = require("./api/v1/user/user.controller");
 const authRouter = require('./middleware/auth');
 const secureRouter = require('./middleware/secure');
 const app = express();
-const PORT = process.env.PORT || 3002;
+const BACKEND_URL = process.env.BACKEND_URL;
+const PORT = process.env.PORT;
 
 app.use(errorHandler);
 app.use("/api/v1/project", projectRouter);

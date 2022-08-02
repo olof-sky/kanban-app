@@ -4,7 +4,8 @@ const config = {
       host: "localhost",
       user: "root",
       password: "password",
-      database: "kanban"
+      database: "kanban",
+      port: 3306,
     },
     listPerPage: 10,
     userRolesList: {
