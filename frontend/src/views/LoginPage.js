@@ -142,7 +142,7 @@ return (
               )
             }
             { isEmailError[0] && email.length < 1 ? ( 
-              <input classname="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
+              <input className="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
                 setEmail(e.target.value)}}/> 
               ) : (
               <input required value={email} placeholder="Email" type="email" onChange={(e)=> {
