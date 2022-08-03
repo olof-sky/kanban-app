@@ -42,16 +42,24 @@ router.put('/logout', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  // check email
-  const user = await db.User.scope('withHash').findOne({ where: { email: req.body.email } });
-  if(!user) {
-    return res.status(400).json({"Error": 'Email is not found'});
+  //validation
+  if(req.body.email === "") {
+    return res.status(400).json({"EmailError": 'Email is empty'});
   }  
+  if(req.body.password === "") {
+    return res.status(400).json({"PasswordError": 'Password is empty'});
+  }  
+
+  //get user
+  const user = await db.User.scope('withHash').findOne({ where: { email: req.body.email } })
+  if (!user) return res.status(400).json({"EmailError": 'User not found'});
+
   // check password
   const validPassword = await bcrypt.compare(req.body.password, user.password_hash);
   if(!validPassword) {
-    return res.status(400).json({"Error": 'Invalid password'});
+    return res.status(400).json({"PasswordError": 'Invalid password'});
   }  
+
   // create and assign tokens
   const refreshToken = generateRefreshToken(user)
   const token = generateAccessToken(user)

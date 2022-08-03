@@ -7,18 +7,38 @@ const uuid = require("uuid");
 
 // Route for creating a user
 async function create(params, res) {
+  //trim
+  const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]/;
+  const passwordValidation = /[!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]/;
+
+  params.first_name = params.first_name.trim().charAt(0).toUpperCase() + params.first_name.trim().slice(1).toLowerCase();
+  params.last_name = params.last_name.trim().charAt(0).toUpperCase() + params.last_name.trim().slice(1).toLowerCase();
+  params.password = params.password.trim();
+
   // validate
+  if (params.first_name === "") { return res.status(400).json({"FirstNameError": "First name can not be empty"})}
+  if (params.last_name === "") { return res.status(400).json({"LastNameError": "Last name can not be empty"})}
+  if (params.email === "") { return res.status(400).json({"EmailError": "Email can not be empty"})}
+  if (params.password === "") { return res.status(400).json({"PasswordError": "Password can not be empty"})}
+
+  if (params.first_name.match(specialChars)) {
+    return res.status(400).json({"FirstNameError": 'First name is not valid'});
+  }
+  if (params.last_name.match(specialChars)) {
+    return res.status(400).json({"LastNameError": 'Last name is not valid'});
+  }
   if (await db.User.findOne({ where: { email: params.email } })) {
-      return res.status(400).json({"response": 'Email ' + params.email + ' is already registered'});
+      return res.status(400).json({"EmailError": 'Email is already registered'});
   }
   if (!body(params.email).isEmail().normalizeEmail()) {
-    return res.status(400).json({"response": 'Email ' + params.email + ' is not valid'});
+    return res.status(400).json({"EmailError": 'Email is not valid'});
   }
-  
-  if (params.first_name === "") { return res.status(400).json({"response": "First name can not be empty"})}
-  if (params.last_name === "") { return res.status(400).json({"response": "Last name can not be empty"})}
-  if (params.email === "") { return res.status(400).json({"response": "Email can not be empty"})}
-  if (params.password === "") { return res.status(400).json({"response": "Password can not be empty"})}
+  if (params.password.length < 8 || params.password.length > 16) {
+    return res.status(400).json({"PasswordError": 'Password must be 8-16 chars'});
+  }
+  if (!params.password.match(passwordValidation)) {
+    return res.status(400).json({"PasswordError": 'Password contains special characters'});
+  }
 
   // hash password
   password_hash = await bcrypt.hash(params.password, 10);
