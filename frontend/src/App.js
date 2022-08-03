@@ -13,7 +13,7 @@ function App() {
   setInterval(async function() {
     if (!loggedIn) return;
     try {
-      const response = await axios.get("http://localhost:3002/secure", { headers: { Authorization:sessionStorage.getItem('Token') }})
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/secure`, { headers: { Authorization:sessionStorage.getItem('Token') }})
       if (response.status === 200) return }
     catch(err) {
       logIn(false);
@@ -31,7 +31,7 @@ function App() {
   async function getLoggedInUser() {
     try { 
       if (sessionStorage.getItem('Token')) {
-        const response = await axios.get("http://localhost:3002/api/v1/user/getLoggedInUser", { headers: { Authorization:sessionStorage.getItem('Token') }})
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/user/getLoggedInUser`, { headers: { Authorization:sessionStorage.getItem('Token') }})
         if (response.status === 200) {
           sessionStorage.setItem('User', JSON.stringify(response.data));
           logIn(true);
@@ -47,7 +47,7 @@ function App() {
   
   const logout = async () => {
     const header = sessionStorage.getItem('User')
-    const resp = await axios.put('http://localhost:3002/api/auth/logout', { headers: { User:header }})
+    const resp = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/auth/logout`, { headers: { User:header }})
     if (resp) {
       logIn(false);
       sessionStorage.removeItem('Token');
