@@ -67,6 +67,17 @@
         border-radius: 30px;
       }
 
+      .input-error {
+        color: $error;
+        background: $input-error-background;
+        border: 1px solid;
+      }
+
+      .input-error:focus {
+        border: 1px solid $main-dark-green;
+        background: $input-error-background;
+      }
+
       input:focus {
         border: 1px solid $main-dark-green;
         outline: none;
