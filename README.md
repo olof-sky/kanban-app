@@ -15,7 +15,7 @@ Server running on node.js / express. Handles APIs, middleware and security. The 
 
 The server security is based on refresh tokens/access tokens, where the access token has a lifetime of 15 minutes and gets refreshed by the refresh token on login and api actions. Tokens are stored in session storage on client side. The refreshtoken is also stored in the user object in MySQL db. User IDs are stored inside the tokens. To validate the refresh token, server checks if session storage token and the user token are equal, then return the user object associated with that token. This is to prevent old refresh tokens of being used several times. Refresh tokens are rotated on refresh.
 
-Client side script is run every 15 minutes in App to check whether access token is still valid or not.
+Client side script is run with a set timeschedule in App to check whether access token is still valid or not.
 Refreshtokens get deleted from user object in db on logout and sessionstorage is cleaned.
 
 #### :package: APIs
