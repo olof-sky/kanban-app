@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
-import CreateProject from './views/CreateProject';
 import Login from './views/LoginPage';
-import MainPage from './views/MainPage';
+import Projects from './views/Projects';
+import Calendar from './views/Calendar';
+import Profile from './views/Profile';
+import Team from './views/Team';
+import NavBar from './components/NavBar'
 import './styles/App.scss'
 
 function App() {
   const [loggedIn, logIn] = useState(false);
 
-  // Logout after 15 min if token expired
+  // Logout after 3h if token expired
   setInterval(async function() {
     if (!loggedIn) return;
     try {
@@ -20,9 +23,9 @@ function App() {
       sessionStorage.removeItem('Token');
       sessionStorage.removeItem('Refresh-Token');
       sessionStorage.removeItem('User');
-      window.location = "/"
+      window.location = "/projects"
     }
-  }, 1000*60*15);
+  }, 1000*60*60*3);
 
   useEffect(() => {
     getLoggedInUser();
@@ -72,17 +75,15 @@ function App() {
   if (loggedIn) {
     return (
       <div className="App">
-        <header className="App-header">
-          <nav>
-            <Link to="/" className="link">Main Page</Link>
-            <Link to="/createproject" className="link">Create Project</Link>
-            <button onClick={logout}>Logout</button>
-          </nav>
+        <header>
+          <NavBar logout={logout}/>
         </header>
         <main>
           <Routes>
-            <Route path="/" element={ <MainPage/> } exact/>
-            <Route path="/createproject" element={ <CreateProject/> } exact/>
+            <Route path="/calendar" element={ <Calendar/> } exact/>
+            <Route path="/team" element={ <Team/> } exact/>
+            <Route path="/projects" element={ <Projects/> } exact/>
+            <Route path="/profile" element={ <Profile/> } exact/>
           </Routes>
         </main>
       </div>
