@@ -25,9 +25,30 @@ async function getMultiple(){
   return await db.Project.findAll();
 }
 
+// Get multiple by user
+async function getMultipleByUser(user_id){
+  let userProjects = []
+  let projects = []
+  await db.User_Projects.findAll({
+    where: {
+      user_id: user_id,
+    }
+  }).then((response => [
+    userProjects = response
+  ]))
+  
+  for (let i = 0; i < userProjects.length; i++) {
+    let id = userProjects[i].dataValues.project_id
+    await getById(id).then((response =>
+      projects.push(response)
+    ))
+  }
+  return projects;
+}
+
 // Get one project
 async function getById(project_id){
-  return await getproject(project_id);
+  return await getProject(project_id);
 }
 
 async function updateProjectName(project_id, params) {
@@ -56,7 +77,7 @@ async function deleteProject(project_id) {
   await project.destroy();
 }
 
-async function getproject(project_id) {
+async function getProject(project_id) {
   const project = await db.Project.findByPk(project_id);
   if (!project) throw 'Project not found';
   return project;
@@ -65,6 +86,7 @@ async function getproject(project_id) {
 module.exports = {
   create,
   getMultiple,
+  getMultipleByUser,
   getById,
   updateProjectName,
   updateProjectType,

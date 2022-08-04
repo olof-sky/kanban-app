@@ -39,8 +39,18 @@ router.get('/getMultiple', async function(req, res, next) {
   }
 });
 
+/* GET projects. */
+router.get('/getMultipleByUser/:id', verifyUserToken, async function(req, res, next) {
+  try {
+    res.json(await projectService.getMultipleByUser(req.params.id));
+  } catch (err) {
+    console.error(`Error while getting projects `, err.message);
+    next(err);
+  }
+});
+
 /* GET project by id. */
-router.get('/getById/:id', async function(req, res, next) {
+router.get('/getById/:id', verifyUserToken, async function(req, res, next) {
   try {
     res.json(await projectService.getById(req.params.id));
   } catch (err) {
