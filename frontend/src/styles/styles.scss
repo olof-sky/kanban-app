@@ -1,9 +1,14 @@
 /****** COLORS ******/
 $main-white: #fff;
-$offset-white: #f6f6f6;
+$offset-white: #fcfcfc;
+$white-table-opacity: #fcfcfcd9;
+
+$light-grey: rgba(48, 47, 47, 0.075);
 
 $main-green: rgb(41 44 26);
 $main-dark-green: rgb(22, 24, 14);
+
+$main-yellow: #ffe253;
 
 $error: red;
 
@@ -12,13 +17,12 @@ $main-background: $offset-white;
 
 // Inputs
 $input-background: rgb(211 211 211 / 15%);
-$input-background-selected: rgba(48, 47, 47, 0.075);
-$input-blurred: rgba(48, 47, 47, 0.2);
+$input-background-selected: $light-grey;
+$input-text-blurred: rgba(48, 47, 47, 0.2);
 $input-error-background: rgb(255, 190, 190, 0.5);
 
 
 //Buttons
-$light-button: #fcfcfc;
 $light-button-selected: #dddddd;
 
 /****** STYLES ******/
