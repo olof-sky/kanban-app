@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import axios from 'axios'
 import LoginSideImg from '../assets/LoginSideImg.png'
-import '../styles/LoginPage.scss'
+import '../styles/views/LoginPage.scss'
 const validator = require("email-validator");
 
 function Login() {
@@ -121,7 +121,33 @@ const toggleForm = function () {
 return (
   <div className="login-body">
     <div className="login-left-container">
-      { showRegister ? (
+      { !showRegister ? (
+        <div className="form-card">
+          <h1>Welcome to Skylan</h1>
+          <div className="inputs">
+          { isEmailError[0] && email.length < 1 ? ( 
+            <input className="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
+              setEmail(e.target.value)}}/> 
+            ) : (
+            <input required value={email} placeholder="Email" type="email" onChange={(e)=> {
+              setEmail(e.target.value)}}/> 
+            )
+          }
+          { isPasswordError[0] && password.length < 1 ? ( 
+            <input className="input-error" required value={password} placeholder={isPasswordError[1]} type="password" onChange={(e)=>{
+              setPassword(e.target.value)}}/>
+            ) : (
+            <input required value={password} placeholder="Password" type="password" onChange={(e)=>{
+              setPassword(e.target.value)}}/>
+            )
+          }
+          </div>
+          <div className="buttons">
+            <button id="sign-btn" onClick={login}>SIGN IN</button>
+            <button id="register-btn" onClick={toggleForm}>REGISTER</button>
+          </div>
+        </div>
+        ) : (
         <div className="form-card">
           <div className="inputs">
             <h2>Sign up now</h2>
@@ -170,34 +196,8 @@ return (
             <button onClick={register} id="sign-btn">REGISTER</button>      
             <button onClick={toggleForm}>BACK</button>      
           </div>
-        </div> 
-      ) : (
-        <div className="form-card">
-          <h1>Welcome to Skylan</h1>
-          <div className="inputs">
-          { isEmailError[0] && email.length < 1 ? ( 
-            <input className="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
-              setEmail(e.target.value)}}/> 
-            ) : (
-            <input required value={email} placeholder="Email" type="email" onChange={(e)=> {
-              setEmail(e.target.value)}}/> 
-            )
-          }
-          { isPasswordError[0] && password.length < 1 ? ( 
-            <input className="input-error" required value={password} placeholder={isPasswordError[1]} type="password" onChange={(e)=>{
-              setPassword(e.target.value)}}/>
-            ) : (
-            <input required value={password} placeholder="Password" type="password" onChange={(e)=>{
-              setPassword(e.target.value)}}/>
-            )
-          }
-          </div>
-          <div className="buttons">
-            <button id="sign-btn" onClick={login}>SIGN IN</button>
-            <button id="register-btn" onClick={toggleForm}>REGISTER</button>
-          </div>
-        </div>
-      )}
+        </div> )
+      }
     </div>
     <div className="login-right-container">
     <img src={LoginSideImg} alt="sideImg" id="login-image" />
