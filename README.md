@@ -7,10 +7,10 @@ Run npm install in the server directory, you can then run:
 
 Runs the server on [http://localhost:3002](http://localhost:3002)
 
-#### :open_book: About
+#### About
 Server running on node.js / express. Handles APIs, middleware and security. The application is using MySQL db together with sequelizer in node to implement mapping and access to db objects. API calls are made from the client side React application and objects are returned as json. API structure built using controller, model and service. Calls are made to controller which uses the corresponding service to get items from sequelized instance of the MySQL db. Db is initialized in helpers/db.
 
-#### :lock: Security
+#### Security
 ##### JWT Tokens
 
 The server security is based on refresh tokens/access tokens, where the access token has a lifetime of 15 minutes and gets refreshed by the refresh token on login and api actions. Tokens are stored in session storage on client side. The refreshtoken is also stored in the user object in MySQL db. User IDs are stored inside the tokens. To validate the refresh token, server checks if session storage token and the user token are equal, then return the user object associated with that token. This is to prevent old refresh tokens of being used several times. Refresh tokens are rotated on refresh.
@@ -18,7 +18,7 @@ The server security is based on refresh tokens/access tokens, where the access t
 Client side script is run with a set timeschedule in App to check whether access token is still valid or not.
 Refreshtokens get deleted from user object in db on logout and sessionstorage is cleaned.
 
-#### :package: APIs
+#### APIs
 ##### Create
 - Project
   - [x] /api/v1/project/create
@@ -80,7 +80,7 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
    - [x] /api/auth/logout
   
 #### :pushpin: ToDo
-  - [ ] Add better error message at login screen
+  - [x] Add better error message at login screen
   - [ ] Update APIs
   - [x] Delete APIs
   - [ ] Project tasks
