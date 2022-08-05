@@ -1,15 +1,11 @@
 /****** COLORS ******/
 $main-white: #fff;
 $offset-white: #fcfcfc;
-$white-table-opacity: #fcfcfcd9;
-
+$offset-white-opacity: #fcfcfcd9;
 $light-grey: rgba(48, 47, 47, 0.075);
-
 $main-green: rgb(41 44 26);
 $main-dark-green: rgb(22, 24, 14);
-
 $main-yellow: #ffe253;
-
 $error: red;
 
 // Backgrounds
@@ -21,15 +17,104 @@ $input-background-selected: $light-grey;
 $input-text-blurred: rgba(48, 47, 47, 0.2);
 $input-error-background: rgb(255, 190, 190, 0.5);
 
-
-//Buttons
+// Buttons
 $light-button-selected: #dddddd;
 
+
+
+
+
 /****** STYLES ******/
-$card-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+// Shadows
+$main-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+
+// Inputs
+input {
+  color: $main-dark-green;
+  font-size: 16px;
+  padding-left: 25px;
+  border: 1px solid $light-grey;
+  background: $input-background;
+  height: 30px;
+  border-radius: 32px;
+}
+
+.input-error {
+  color: $error;
+  background: $input-error-background;
+  border: 1px solid;
+}
+
+.input-error:focus {
+  border: 1px solid $main-dark-green;
+  background: $input-error-background;
+}
+
+input:focus {
+  border: 1px solid $main-dark-green;
+  outline: none;
+  background: $input-background-selected;
+}
+
+input:focus::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $input-text-blurred;
+}
+input:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $input-text-blurred;
+}
+input:focus::-ms-input-placeholder { /* Microsoft Edge */
+  color: $input-text-blurred;
+}
+
+select {
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+  color: $main-dark-green;
+  font-size: 16px;
+  padding-left: 24px;
+  border: 1px solid $light-grey;
+  background: $input-background;
+  height: 32px;
+  width: 225px;
+  border-radius: 32px;
+}
+
+select:focus {
+  border: 1px solid $light-grey;
+  outline: 1px solid $main-dark-green;
+}
+
+// Buttons
+.btn {
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid $main-dark-green;
+  box-shadow: $main-box-shadow;
+  background: $main-dark-green;
+  color: $offset-white;
+  padding: 0 24px 0 24px;
+  height: 32px;
+  border-radius: 32px;
+}
+
+.btn:hover, .btn:focus{
+  cursor: pointer;
+  border: 1px solid $main-dark-green;
+  opacity: 0.8;
+}
+
+
+
 
 /****** FONTS ******/
 $main-font: sans-serif;
+
+
+
+
+
+
 
 
 /****** BREAKPOINTS ******/

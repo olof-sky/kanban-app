@@ -29,7 +29,7 @@
     align-items: center;
     align-content: space-around;
     justify-content: center;
-    box-shadow: $card-box-shadow;
+    box-shadow: $main-box-shadow;
     
     p {
       padding: 0;
@@ -100,16 +100,16 @@
       display: flex;
       flex-direction: column;
       width: 80%;
-      margin-top: 20px;
+      margin-top: 24px;
 
       button {
         font-size: 18px;
         border: 1px solid $main-dark-green;
         background: $offset-white;
         color: $main-green;
-        margin-top: 20px;
-        height: 55px;
-        border-radius: 30px;
+        margin-top: 16px;
+        height: 56px;
+        border-radius: 32px;
       }
       
       button:hover, button:focus{
@@ -211,7 +211,7 @@
     .form-card {
       margin: 0 5% 0 5%;
       width: 55%;
-      max-height: 80%;
+      max-height: 85%;
       min-width: 450px;
       background: #fffc;
   
@@ -224,17 +224,17 @@
         width: 70%;
 
         input {
-          height: 45px;
+          height: 48px;
           border: 1px solid $input-text-blurred
         }
       }
   
       .buttons {
         width: 70%;
-        margin-top: 10px;
+        margin-top: 8px;
   
         button {
-          height: 45px;
+          height: 48px;
         }
       }
     }
@@ -277,7 +277,7 @@
       background: #fffc;
   
       h1 {
-        font-size: 35px;
+        font-size: 36px;
         margin: 0 20% 10% 20%;
       }
   
@@ -291,10 +291,10 @@
   
       .buttons {
         width: 80%;
-        margin-top: 10px;
+        margin-top: 8px;
   
         button {
-          height: 45px;
+          height: 48px;
         }
       }
     }
