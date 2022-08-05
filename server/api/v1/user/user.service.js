@@ -9,7 +9,7 @@ const uuid = require("uuid");
 async function create(params, res) {
   //trim
   const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~\d]/;
-  const passwordValidation = /[!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~]/;
+  const passwordValidation = /[!"#$%&'()*+,-.:;<=>?@[\]^_`{|}~\d]/;
 
   params.first_name = params.first_name.trim().charAt(0).toUpperCase() + params.first_name.trim().slice(1).toLowerCase();
   params.last_name = params.last_name.trim().charAt(0).toUpperCase() + params.last_name.trim().slice(1).toLowerCase();
@@ -37,7 +37,7 @@ async function create(params, res) {
     return res.status(400).json({"PasswordError": 'Password must be 8-16 chars'});
   }
   if (!params.password.match(passwordValidation)) {
-    return res.status(400).json({"PasswordError": 'Password contains special characters'});
+    return res.status(400).json({"PasswordError": 'Requires numbers/special characters'});
   }
 
   // hash password

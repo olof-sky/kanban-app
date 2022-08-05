@@ -4,6 +4,27 @@ const uuid = require("uuid");
 // Route for creating a project
 
 async function create(params, userId) {
+  // trim
+  const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  params.project_name = params.project_name.trim().charAt(0).toUpperCase() + params.project_name.trim().slice(1).toLowerCase();
+  params.project_type = params.project_type.trim().charAt(0).toUpperCase() + params.project_type.trim().slice(1).toLowerCase();
+  //validate
+  if (params.project_name === "") { return res.status(400).json({"ProjectNameError": "Project name can not be empty"})}
+  if (params.project_type === "") { return res.status(400).json({"ProjectTypeError": "Project type can not be empty"})}
+  if (!params.project_type === "Kanban" || !params.project_type === "Future option") { return res.status(400).json({"ProjectTypeError": "Project type is invalid"})}
+
+  if (params.project_name.match(specialChars)) {
+    return res.status(400).json({"projectNameError": 'Name uses invalid characters'});
+  }
+
+  if (params.project_type.match(specialChars)) {
+    return res.status(400).json({"ProjectTypeError": 'Type uses invalid characters'});
+  }
+
+  if (params.project_name.length < 1 || params.project_name.length > 30) {
+    return res.status(400).json({"ProjectNameError": 'Name must be 1-30 chars'});
+  }
+
   const projectId = uuid.v4() 
   const project = new db.Project({
     project_id: projectId, 
