@@ -3,29 +3,31 @@ import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import Login from './views/LoginPage';
 import Projects from './views/Projects';
+import Project from './views/Project';
 import Calendar from './views/Calendar';
 import Profile from './views/Profile';
 import Team from './views/Team';
 import NavBar from './components/NavBar'
+import { refreshToken } from './helper'
 import './styles/App.scss'
 
 function App() {
   const [loggedIn, logIn] = useState(false);
 
-  // Logout after 3h if token expired
+  // Logout if token expired
   setInterval(async function() {
     if (!loggedIn) return;
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/secure`, { headers: { Authorization:sessionStorage.getItem('Token') }})
-      if (response.status === 200) return }
+      if (response.status === 200) return refreshToken()}
     catch(err) {
       logIn(false);
       sessionStorage.removeItem('Token');
       sessionStorage.removeItem('Refresh-Token');
       sessionStorage.removeItem('User');
-      window.location = "/projects"
+      window.location = "/"
     }
-  }, 1000*60*60*3);
+  }, 1000*60*14);
 
   useEffect(() => {
     getLoggedInUser();
@@ -83,6 +85,8 @@ function App() {
             <Route path="/calendar" element={ <Calendar/> } exact/>
             <Route path="/team" element={ <Team/> } exact/>
             <Route path="/projects" element={ <Projects/> } exact/>
+            <Route path="/projects/:id" element={ <Project/> } exact/>
+            <Route path="/profile/:id" element={ <Profile/> } exact/>
             <Route path="/profile" element={ <Profile/> } exact/>
           </Routes>
         </main>
