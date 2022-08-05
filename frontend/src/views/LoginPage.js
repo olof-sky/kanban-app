@@ -126,10 +126,10 @@ return (
           <h1>Welcome to Skylan</h1>
           <div className="inputs">
           { isEmailError[0] && email.length < 1 ? ( 
-            <input className="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
+            <input autoFocus className="input-error" required value={email} placeholder={isEmailError[1]} type="email" onChange={(e)=> {
               setEmail(e.target.value)}}/> 
             ) : (
-            <input required value={email} placeholder="Email" type="email" onChange={(e)=> {
+            <input autoFocus required value={email} placeholder="Email" type="email" onChange={(e)=> {
               setEmail(e.target.value)}}/> 
             )
           }
@@ -152,10 +152,10 @@ return (
           <div className="inputs">
             <h2>Sign up now</h2>
             { isFirstNameError[0] && firstName.length < 1 ? ( 
-              <input className="input-error" required value={firstName} placeholder={isFirstNameError[1]} type="text" onChange={(e)=> {
+              <input autoFocus className="input-error" required value={firstName} placeholder={isFirstNameError[1]} type="text" onChange={(e)=> {
                 setFirstName(e.target.value)}}/> 
               ) : (
-              <input required value={firstName} placeholder="First name" type="text" onChange={(e)=> {
+              <input autoFocus required value={firstName} placeholder="First name" type="text" onChange={(e)=> {
                 setFirstName(e.target.value)}}/> 
               )
             }
