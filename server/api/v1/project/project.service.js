@@ -24,21 +24,24 @@ async function create(params, userId) {
   if (params.project_name.length < 1 || params.project_name.length > 30) {
     return res.status(400).json({"ProjectNameError": 'Name must be 1-30 chars'});
   }
-
-  const projectId = uuid.v4() 
-  const project = new db.Project({
-    project_id: projectId, 
-    project_name: params.project_name, 
-    project_type: params.project_type, 
-    project_admins: params.project_admins
-  });
-  // save project
-  const userProject = new db.User_Projects({
-    user_id: userId,
-    project_id: projectId, 
-  });
-  await project.save();
-  await userProject.save();
+  try {  
+    const projectId = uuid.v4() 
+    const project = new db.Project({
+      project_id: projectId, 
+      project_name: params.project_name, 
+      project_type: params.project_type, 
+      project_task_status: JSON.stringify({"Todo": [], "In Progress": [], "Finished": []}), 
+      project_admins: params.project_admins
+    });
+    // save project
+    const userProject = new db.User_Projects({
+      user_id: userId,
+      project_id: projectId, 
+    });
+    await project.save();
+    await userProject.save();
+  }
+  catch(err) {console.log(err)}
 }
 
 // Get multiple projects
@@ -48,33 +51,31 @@ async function getMultiple(){
 
 // Get multiple by user
 async function getMultipleByUser(user_id){
-  let userProjects = []
-  let projects = []
-  await db.User_Projects.findAll({
-    where: {
-      user_id: user_id,
-    }
-  }).then((response => [
-    userProjects = response
-  ]))
+  let userProjects = await getUserProjects(user_id)
+  let projects = [];
   
   for (let i = 0; i < userProjects.length; i++) {
     let id = userProjects[i].dataValues.project_id
-    await getById(id).then((response =>
+    
+    try {
+      await getProject(id).then((response =>
       projects.push(response)
-    ))
+    ))}
+    catch (err) {console.log(err)}
   }
   return projects;
 }
 
 // Get one project
-async function getById(project_id){
-  return await getProject(project_id);
+async function getById(project_id, user_id, res){
+  let project = await getUserProjectById(project_id, user_id)
+  if (!project) return res.status(400).json("Can not access project.");
+  return getProject(project.project_id);
 }
 
 async function updateProjectName(project_id, params) {
 
-  const project = await getproject(project_id);
+  const project = await getProject(project_id);
   const projectNameChanged = params.project_name;
 
   // copy params to project and save
@@ -84,7 +85,7 @@ async function updateProjectName(project_id, params) {
 
 async function updateProjectType(project_id, params) {
 
-  const project = await getproject(project_id);
+  const project = await getProject(project_id);
   const projectTypeChanged = params.project_type;
 
   // copy params to project and save
@@ -94,15 +95,44 @@ async function updateProjectType(project_id, params) {
 
 // Delete a project
 async function deleteProject(project_id) {
-  const project = await getproject(project_id);
+  const project = await getProject(project_id);
   await project.destroy();
 }
 
+
+//Internal functions
 async function getProject(project_id) {
   const project = await db.Project.findByPk(project_id);
   if (!project) throw 'Project not found';
   return project;
 }
+
+
+async function getUserProjectById(project_id, user_id) {
+  let project;
+  await db.User_Projects.findOne({
+    where: {
+      user_id: user_id,
+      project_id: project_id,
+    }
+  }).then((response => [
+    project = response,
+  ]))
+  return project;
+} 
+
+async function getUserProjects(user_id) {
+  let projects = []
+  await db.User_Projects.findAll({
+    where: {
+      user_id: user_id,
+    }
+  }).then((response => [
+    projects = response
+  ]))
+  return projects;
+} 
+
 
 module.exports = {
   create,

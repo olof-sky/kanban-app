@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const projectService = require('./project.service');
 const router = express.Router();
-const verifyUserToken = require('../../../middleware/verifyToken');
+const validateUser = require('../../../middleware/verifyToken');
 router.use(cors());
 router.use(express.json({
   type: 'application/json',
@@ -20,7 +20,7 @@ curl -H "Content-Type: application/json" -d '{"projectName":"xyz","projectType":
 *******/
 
 /* CREATE project. */
-router.post('/create', verifyUserToken, async function(req, res, next) {
+router.post('/create', validateUser, async function(req, res, next) {
   try {
     const response = await projectService.create(req.body, res.user.user_id);
     return res.status(200).json({"Success": "Successfully created project", response});
@@ -31,9 +31,10 @@ router.post('/create', verifyUserToken, async function(req, res, next) {
 });
 
 /* GET projects. */
-router.get('/getMultiple', async function(req, res, next) {
+router.get('/getMultiple', validateUser, async function(req, res, next) {
+  if (!res.user.role === "Admin") return;
   try {
-    res.json(await projectService.getMultiple());
+    return res.json(await projectService.getMultiple());
   } catch (err) {
     console.error(`Error while getting projects `, err.message);
     next(err);
@@ -41,9 +42,10 @@ router.get('/getMultiple', async function(req, res, next) {
 });
 
 /* GET projects. */
-router.get('/getMultipleByUser/:id', verifyUserToken, async function(req, res, next) {
+router.get('/getMultipleByUser', validateUser, async function(req, res, next) {
+  const id = res.user.user_id
   try {
-    res.json(await projectService.getMultipleByUser(req.params.id));
+    res.json(await projectService.getMultipleByUser(id));
   } catch (err) {
     console.error(`Error while getting projects `, err.message);
     next(err);
@@ -51,17 +53,18 @@ router.get('/getMultipleByUser/:id', verifyUserToken, async function(req, res, n
 });
 
 /* GET project by id. */
-router.get('/getById/:id', verifyUserToken, async function(req, res, next) {
+router.get('/getById/:id', validateUser, async function(req, res, next) {
   try {
-    res.json(await projectService.getById(req.params.id));
+    let response = res.json(await projectService.getById(req.params.id, res.user.user_id, res))
+    return response;
   } catch (err) {
-    console.error(`Error while getting project with id: ${projectId} `, err.message);
+    console.error(`Error while getting project with id: ${req.params.id} `, err.message);
     next(err);
   }
 });
 
 /* UPDATE project name. { projectName } */
-router.put('/updateProjectName/:id', async function(req, res, next) {
+router.put('/updateProjectName/:id', validateUser, async function(req, res, next) {
   try {
     res.json(await projectService.updateProjectName(req.params.id, req.query));
   } catch (err) {
@@ -71,7 +74,7 @@ router.put('/updateProjectName/:id', async function(req, res, next) {
 });
 
 /* UPDATE project type. { projectType } */
-router.put('/updateProjectType/:id', async function(req, res, next) {
+router.put('/updateProjectType/:id', validateUser, async function(req, res, next) {
   try {
     res.json(await projectService.updateProjectType(req.params.id, req.query));
   } catch (err) {
@@ -81,7 +84,7 @@ router.put('/updateProjectType/:id', async function(req, res, next) {
 });
 
 /* DELETE project. */
-router.delete('/deleteProject/:id', async function(req, res, next) {
+router.delete('/deleteProject/:id', validateUser, async function(req, res, next) {
   try {
     res.json(await projectService.deleteProject(req.params.id));
   } catch (err) {
