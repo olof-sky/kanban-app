@@ -17,9 +17,8 @@ const handleClick = (e) => {
 }
 
 try {
-  const user = JSON.parse(sessionStorage.getItem('User'));
   useEffect( ()=>{
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/project/getMultipleByUser/${user['user_id']}`, { headers: { Authorization:sessionStorage.getItem('Token') }})
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/project/getMultipleByUser`, { headers: { Authorization:sessionStorage.getItem('Token') }})
     .then((res)=>{
       return setProjectList(res.data)
     });
