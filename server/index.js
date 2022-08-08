@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 const projectRouter = require("./api/v1/project/project.controller");
+const projectTaskRouter = require("./api/v1/project_task/projectTask.controller");
 const userRouter = require("./api/v1/user/user.controller");
 const authRouter = require('./middleware/auth');
 const secureRouter = require('./middleware/secure');
@@ -12,6 +13,7 @@ const PORT = process.env.PORT;
 
 app.use(errorHandler);
 app.use("/api/v1/project", projectRouter);
+app.use("/api/v1/projectTask", projectTaskRouter);
 app.use("/api/v1/user", userRouter);
 app.use('/api/auth', authRouter); 
 app.use('/secure', secureRouter);
