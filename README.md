@@ -81,14 +81,12 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
   
 #### :pushpin: ToDo
   - [x] Add better error message at login screen
-  - [ ] Update APIs
-  - [x] Delete APIs
+  - [ ] Validate projects API
   - [ ] Project tasks
   - [x] Users
   - [ ] Groups
   - [ ] Roles
   - [x] Security
-  - [ ] Db mapping
 
 ## :page_facing_up: Frontend
 Run npm install in the frontend directory, you can then run:
