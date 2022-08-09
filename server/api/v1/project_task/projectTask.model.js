@@ -7,12 +7,12 @@ function model(sequelize) {
         task_id: { primaryKey: true, type: DataTypes.STRING, allowNull: false },
         project_project_id: { type: DataTypes.STRING, allowNull: false },
         task_description: { type: DataTypes.STRING, allowNull: false },
-        task_assignee: { type: DataTypes.STRING, allowNull: true },
+        task_assignee: { type: DataTypes.JSON, allowNull: true },
         task_admin: { type: DataTypes.JSON, allowNull: false },
         task_status: { type: DataTypes.STRING, allowNull: false },
     };
     const options = {
-        timestamps: false,
+        timestamps: true,
     };
     return sequelize.define('Project_Task', attributes, options);
 }
