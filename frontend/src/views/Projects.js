@@ -29,12 +29,10 @@ catch(err) {
 }
 
 const goToProject = (id) => {
-  console.log(id)
   window.location = `/projects/${id}`
 }
 
 const goToUser = (id) => {
-  console.log(id)
   window.location = `/profile/${id}`
 }
 
