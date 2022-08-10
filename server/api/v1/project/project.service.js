@@ -40,6 +40,7 @@ async function create(params, userId) {
     });
     await project.save();
     await userProject.save();
+    return project;
   }
   catch(err) {console.log(err)}
 }

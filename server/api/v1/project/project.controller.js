@@ -23,7 +23,7 @@ curl -H "Content-Type: application/json" -d '{"projectName":"xyz","projectType":
 router.post('/create', validateUser, async function(req, res, next) {
   try {
     const response = await projectService.create(req.body, res.user.user_id);
-    return res.status(200).json({"Success": "Successfully created project", response});
+    return res.status(200).json({"Project": response});
   } catch (err) {
     console.error(err, `Error while creating project `, err.message);
     next(err);
