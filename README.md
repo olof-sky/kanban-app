@@ -81,8 +81,8 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
   
 #### :pushpin: ToDo
   - [x] Add better error message at login screen
-  - [ ] Validate projects API
-  - [ ] Project tasks
+  - [x] Validate projects API
+  - [x] Project tasks
   - [x] Users
   - [ ] Groups
   - [ ] Roles
