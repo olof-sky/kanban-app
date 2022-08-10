@@ -29,7 +29,6 @@ function CreateTask(props) {
           task_status: props.project_task_status,
           task_admin: admin}, { headers: { Authorization:sessionStorage.getItem('Token') }}
         )
-        refreshToken();
         setIsActive(false)
         window.location = `/projects/${props.project_id}`
       });
