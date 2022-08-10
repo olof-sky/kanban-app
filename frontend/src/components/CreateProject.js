@@ -21,12 +21,12 @@ function CreateProject(props) {
              "user_name": `${res.data.first_name} ${res.data.last_name}`}]
         }
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/v1/project/create`,{
-            project_name: projectName,
-            project_type: projectType,
-            project_admins: projectAdmins,}, { headers: { Authorization:sessionStorage.getItem('Token') }}
-        )
-        refreshToken();
-        window.location = "/projects"
+          project_name: projectName,
+          project_type: projectType,
+          project_admins: projectAdmins,}, { headers: { Authorization:sessionStorage.getItem('Token') }}
+        ).then((response) => {
+          window.location = `/projects/${response.data.Project.project_id}`
+        });
       });
     }
     catch(err) {console.log(err)}
