@@ -83,6 +83,7 @@ Refreshtokens get deleted from user object in db on logout and sessionstorage is
   - [x] Add better error message at login screen
   - [x] Validate projects API
   - [x] Project tasks
+  - [ ] Dragable project tasks
   - [x] Users
   - [ ] Groups
   - [ ] Roles
