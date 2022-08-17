@@ -16,5 +16,16 @@
     border-radius: 30px;
     width: 80%;
     min-height: 80px;
+
+    .profile-icon {
+      align-self: self-end;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px
+    }
+  }
+  .project-task-card-small:hover {
+    cursor: pointer;
+    box-shadow: $main-box-shadow;
   }
 }
