@@ -3,9 +3,20 @@
 .project-body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  
+  height: 100%;
+  width: 100%;
+
+  .show-task-card-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+  }
+
   .project-tasks-header {
     width: 100%;
     margin-top: 32px;

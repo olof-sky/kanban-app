@@ -1,9 +1,5 @@
 import '../styles/components/TaskCardSmall.scss'
 
-const toggleShowProject = () => {
-  console.log("click")
-}
-
 function TaskCardSmall(props) {
   let adminName = ""
   let assigneeName = ""
@@ -13,7 +9,7 @@ function TaskCardSmall(props) {
   const assigneeIcon = `https://ui-avatars.com/api/?background=ffe253&color=000&name=${assigneeName}`
 
   return (
-    <div onClick={ () => toggleShowProject() } className="project-task-body">
+    <div className="project-task-body">
       <div className="project-task-card-small">
         <p>{ props.task_description }</p>
         { props.task_assignee ? (<img className="profile-icon" id="icon" src={assigneeIcon} alt="SVG as an image"></img>) : (<img className="profile-icon" src={adminIcon} alt="SVG as an image"></img>) }
