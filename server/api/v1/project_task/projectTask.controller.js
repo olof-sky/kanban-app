@@ -39,10 +39,21 @@ router.get('/getMultipleByProject/:id', validateUser, verifyUserProjectAccess, a
 /* GET task by id. */
 router.get('/getById/:id', validateUser, verifyUserProjectAccess, async function(req, res, next) {
   try {
-    let response = res.json(await taskService.getById(req.params.id, res))
+    let response = res.json(await taskService.getById(req.headers.task_id, res))
     return response;
   } catch (err) {
-    console.error(`Error while getting task with id: ${req.params.id} `, err.message);
+    console.error(`Error while getting task with id: ${req.headers.task_id} `, err.message);
+    next(err);
+  }
+});
+
+/* UPDATE task status by id. */
+router.put('/updateTaskStatusByProject/:id', validateUser, verifyUserProjectAccess, async function(req, res, next) {
+  try {
+    console.log(req.body.headers)
+    res.json(await taskService.updateTaskStatusByProject(req.body.headers.task_id, req.body.headers.task_status));
+  } catch (err) {
+    console.error(`Error while updating task `, err.message);
     next(err);
   }
 });

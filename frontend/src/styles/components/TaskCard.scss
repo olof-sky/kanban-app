@@ -8,10 +8,6 @@
   width: 100%;
   z-index: 2;
 
-  h1 {
-    font-size: 24px;
-  }
-
   .task-card-card {
     position: relative;
     display: flex;
@@ -45,10 +41,11 @@
       width: 100%;
 
       .task-card-select-status {
-        
       }
 
       .task-card-activity {
+        display: flex;
+        width: 50%;
         margin: 8px;
         padding: 32px;
         border: 1px solid $light-grey;
@@ -60,6 +57,30 @@
         padding: 32px;
         border: 1px solid $light-grey;
         border-radius: 32px;
+        max-width: 30%;
+
+        .task-card-select-container {
+          display: flex;
+          flex-direction: row;
+
+          #task-card-select {
+            color: $main-dark-green;
+            background: $main-blue;
+            height: 32px;
+            width: 225px;
+            border-radius: 32px;
+          }
+            
+          #task-card-select:focus {
+            border: 1px solid $light-grey;
+            outline: 1px solid $main-dark-green;
+          }
+        }
+
+        .task-card-select-status {
+          margin-top: 16px;
+          max-width: 100%;
+        }
       }
     }
   }

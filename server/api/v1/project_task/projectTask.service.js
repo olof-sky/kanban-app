@@ -62,6 +62,18 @@ async function deleteTask(task_id) {
   await task.destroy();
 }
 
+// Update task status
+async function updateTaskStatusByProject(task_id, task_status) {
+  if (!task_status) throw 'Task status empty';
+
+  const task = await getTask(task_id);
+  const taskStatusChanged = task_status;
+
+  // copy params to project and save
+  task.update({ task_status: taskStatusChanged });
+  await task.save();
+}
+
 //Internal functions
 async function getTask(task_id) {
   const task = await db.Project_Task.findByPk(task_id);
@@ -73,5 +85,6 @@ module.exports = {
   create,
   getMultipleByProject,
   getById,
+  updateTaskStatusByProject,
   deleteTask,
 }

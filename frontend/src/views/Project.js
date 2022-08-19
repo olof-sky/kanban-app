@@ -26,9 +26,9 @@ const handleClick = (e) => {
 
 const toggleShowTaskCard = (id) => {
   try {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/projectTask/getById/${id}`, { headers: { Authorization:sessionStorage.getItem('Token') }})
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/v1/projectTask/getById/${params.id}`, { headers: { Authorization:sessionStorage.getItem('Token'), task_id: id }})
     .then((res)=>{
-      return setTask(res.data)
+      setTask(res.data)
     });
   }
   catch(err) {
@@ -40,6 +40,19 @@ const toggleShowTaskCard = (id) => {
   }
   else {
     setShowTaskCard(true) 
+  }
+}
+
+const changeTaskStatus = (new_task_status) => {
+  try {
+    axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/v1/projectTask/updateTaskStatusByProject/${params.id}`, { headers: { Authorization:sessionStorage.getItem('Token'), task_status:new_task_status, task_id: currentTaskId }})
+    .then((res)=>{
+      setTask(res.data)
+      window.location = `/projects/${params.id}`
+    })
+  }
+  catch(err) {
+    console.log(err)
   }
 }
 
@@ -71,7 +84,7 @@ catch(err) {
 if (project) return (
     <div className="project-body">
       { showTaskCard ? ( 
-      <div className="show-task-card-overlay dismiss" onClick={handleClick}><TaskCard toggleShowTaskCard={toggleShowTaskCard} task={task}/></div> 
+      <div className="show-task-card-overlay dismiss" onClick={handleClick}><TaskCard parentCallback={changeTaskStatus} toggleShowTaskCard={toggleShowTaskCard} task={task} project={project}/></div> 
         ) : (null) 
       }
       <div className="project-tasks-header">
@@ -84,7 +97,7 @@ if (project) return (
             <h2>{key}</h2>
             {Object.keys(tasks).map((taskKey, i2) => (
               (tasks[taskKey].task_status === key) ? 
-              <div onClick={ () => toggleShowTaskCard(tasks[taskKey].task_id) } ><TaskCardSmall
+              <div key={i2+" container"} onClick={ () => toggleShowTaskCard(tasks[taskKey].task_id) }><TaskCardSmall
                 key={i2} 
                 task_description={tasks[taskKey].task_description}
                 task_assignee={tasks[taskKey].task_assignee}
