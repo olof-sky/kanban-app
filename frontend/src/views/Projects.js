@@ -26,6 +26,7 @@ try {
 }
 catch(err) {
   console.log(err)
+  window.location = "/"
 }
 
 const goToProject = (id) => {
