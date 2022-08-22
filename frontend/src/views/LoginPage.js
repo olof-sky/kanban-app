@@ -54,7 +54,7 @@ const login = async () => {
       sessionStorage.setItem('Refresh-Token', refreshToken);
       axios.defaults.headers.common['Authorization'] = token;
       axios.defaults.headers.common['Refresh-Token'] = refreshToken;
-      window.location = "/"
+      window.location = "/projects"
     }
   }
   catch(err) {
