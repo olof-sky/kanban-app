@@ -3,6 +3,7 @@ const cors = require('cors');
 const projectService = require('./project.service');
 const router = express.Router();
 const validateUser = require('../../../middleware/verifyToken');
+const validateUserProjectAccess = require('../../../middleware/verifyuserProjectAccess');
 router.use(cors());
 router.use(express.json({
   type: 'application/json',
@@ -77,6 +78,16 @@ router.put('/updateProjectName/:id', validateUser, async function(req, res, next
 router.put('/updateProjectType/:id', validateUser, async function(req, res, next) {
   try {
     res.json(await projectService.updateProjectType(req.params.id, req.query));
+  } catch (err) {
+    console.error(`Error while updating project `, err.message);
+    next(err);
+  }
+});
+
+/* UPDATE project name. { projectName } */
+router.put('/updateProjectTaskStatus/:id', validateUser, validateUserProjectAccess, async function(req, res, next) {
+  try {
+    res.json(await projectService.updateProjectTaskStatus(req.params.id, req.body));
   } catch (err) {
     console.error(`Error while updating project `, err.message);
     next(err);

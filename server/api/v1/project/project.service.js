@@ -75,7 +75,6 @@ async function getById(project_id, user_id, res){
 }
 
 async function updateProjectName(project_id, params) {
-
   const project = await getProject(project_id);
   const projectNameChanged = params.project_name;
 
@@ -85,12 +84,38 @@ async function updateProjectName(project_id, params) {
 }
 
 async function updateProjectType(project_id, params) {
-
   const project = await getProject(project_id);
   const projectTypeChanged = params.project_type;
 
   // copy params to project and save
   project.update({ project_type: projectTypeChanged });
+  await project.save();
+}
+
+async function updateProjectTaskStatus(project_id, params) {
+  // trim
+  const specialChars = /[\[\]{}\\<>\/]/;
+  if (params.new_task_status) {
+    params.new_task_status = params.new_task_status.trim()
+    params.new_task_status = params.new_task_status.charAt(0).toUpperCase() + params.new_task_status.trim().slice(1)
+  }
+
+  if (params.new_task_status.match(specialChars)) {
+    return res.status(400).json({"taskStatusError": 'Status uses invalid characters'});
+  }
+
+  if (params.new_task_status.length > 36) {
+    return res.status(400).json({"taskStatusError": 'Status cannot be longer then 36 characters'});
+  }
+
+  // add status
+  const project = await getProject(project_id);
+  const projectTaskStatus = params.new_task_status;
+  taskStatuses = JSON.parse(project.project_task_status);
+  taskStatuses[`${projectTaskStatus}`] = [];
+  
+  // copy params to project and save
+  project.update({ project_task_status: JSON.stringify(taskStatuses) });
   await project.save();
 }
 
@@ -142,5 +167,6 @@ module.exports = {
   getById,
   updateProjectName,
   updateProjectType,
+  updateProjectTaskStatus,
   deleteProject,
 }
