@@ -1,7 +1,9 @@
 import React,{useEffect, useState} from 'react'
+import Draggable from 'react-draggable';
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
 import CreateTask from '../components/CreateTask'
+import CreateTaskStatus from '../components/CreateTaskStatus'
 import TaskCardSmall from '../components/TaskCardSmall'
 import TaskCard from '../components/TaskCard'
 import { BsSearch } from 'react-icons/bs';
@@ -13,16 +15,38 @@ const [project,setProject] = useState([]);
 const [tasks,setTasks] = useState([]);
 const [task,setTask] = useState([]);
 const [projectTaskStatus,setProjectTaskStatus] = useState({});
+const [currentStatusX,setProjectTaskStatusX] = useState(0);
 const [searchValue,setSearchValue] = useState("");
 const [showTaskCard,setShowTaskCard] = useState(false);
-const [currentTaskId,setCurrentTaskId] = useState("")
+const [currentTaskId,setCurrentTaskId] = useState("");
 const params = useParams();
+const nodeRef = React.useRef(null);
 
 const handleClick = (e) => {
   if (e.target.classList.contains("dismiss")) {
     setShowTaskCard(false);
   }
 }
+
+function handleStart (event, data) {
+  setProjectTaskStatusX(data.x)
+};
+
+function handleStop (event, data) {
+  let statusArray = [];
+  Object.keys(projectTaskStatus).map((key) => (statusArray.push(key)))
+  
+  if (data.x > currentStatusX) {
+    statusArray[event.path[0].id.split("-status-id")[0] || event.path[1].id.split("-status-id")[0]]
+  }
+
+  console.log(
+    statusArray,
+    data,
+    data.x, 
+    event.path[0].id.split("-status-id")[0] || event.path[1].id.split("-status-id")[0],
+    projectTaskStatus)
+};
 
 const toggleShowTaskCard = (id) => {
   try {
@@ -93,11 +117,19 @@ if (project) return (
       </div>
       <div className="project-tasks">
         {Object.keys(projectTaskStatus).map((key, i) => (
-          <div className="project-task-status" key={i}>
+          <Draggable
+            onStop={handleStop}
+            onStart={handleStart}
+            key={i + "-draggable"}
+            nodeRef={nodeRef} 
+            axis="x"
+          >
+            <div ref={nodeRef} className="project-task-status" id={i + "-status-id"} key={i + "-status"}>
             <h2>{key}</h2>
             {Object.keys(tasks).map((taskKey, i2) => (
-              (tasks[taskKey].task_status === key) ? 
-              <div key={i2+" container"} onClick={ () => toggleShowTaskCard(tasks[taskKey].task_id) }><TaskCardSmall
+              ((tasks[taskKey].task_status === key && !searchValue) || ((tasks[taskKey].task_status === key && tasks[taskKey].task_description.toLowerCase().includes(searchValue.toLowerCase())))) ? 
+              <div key={i2 + "-container"} onClick={ () => toggleShowTaskCard(tasks[taskKey].task_id) }>
+              <TaskCardSmall
                 key={i2} 
                 task_description={tasks[taskKey].task_description}
                 task_assignee={tasks[taskKey].task_assignee}
@@ -107,7 +139,11 @@ if (project) return (
             ))}
             <CreateTask project_id={project.project_id} project_task_status={key}/>
           </div>
+          </Draggable>
         ))}
+        <div className="project-create-task-status">
+          <CreateTaskStatus project_id={project.project_id}/>
+        </div>
       </div>
     </div>
   )
