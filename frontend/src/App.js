@@ -46,6 +46,7 @@ function App() {
       else (console.log("No user token found"));
       }
     catch(err) {
+      logIn(false);
       console.log(err)
     }
   }
