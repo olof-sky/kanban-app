@@ -1,0 +1,77 @@
+@import '../styles.scss';
+
+
+.create-task-status-button-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  z-index: 1;
+  
+  .create-task-status-button {
+    width: 40px;
+    height: 40px;
+    background: none;
+	  color: inherit;
+	  border: none;
+	  padding: 0;
+	  font: inherit;
+	  cursor: pointer;
+	  outline: inherit;
+
+    #create-task-status-icon {
+      color: $main-green;
+      opacity: 50%;
+      width: 100%;
+      height: 100%;
+    }
+
+    #create-task-icon:hover {
+      opacity: 80%;
+    }
+  }
+}
+.create-task-status-button-body:hover {
+  cursor: pointer;
+  opacity: 50%;
+  background-color: $light-grey;
+  border-radius: 30px;
+}
+
+.create-task-status-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  z-index: 1;
+
+  .create-task-status-card {
+     position: relative;
+     border-radius: 30px;
+
+    .create-task-status-form {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin: 8px;
+      padding: 16px;
+      border-radius: 30px;
+      height: 180px;
+    }
+
+    input {
+      background-color: $offset-white;
+      margin-top: 8px;
+    }
+
+    select {
+      margin-top: 8px;
+    }
+
+    .btn {
+      margin-top: 24px;
+    }
+  }
+}
