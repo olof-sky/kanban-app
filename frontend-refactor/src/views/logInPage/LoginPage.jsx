@@ -1,12 +1,11 @@
 import React,{useState} from 'react';
-import LoginSideImg from '../assets/LoginSideImg.png'
-import LogInForm from '../components/LogInPage/LogInForm'
-import RegisterForm from '../components/LogInPage/RegisterForm'
+import LoginSideImg from '../../assets/LoginSideImg.png'
+import LogInForm from './LogInForm'
+import RegisterForm from './RegisterForm'
 
-import '../styles/views/LoginPage.scss'
+import '../../styles/views/LoginPage.scss'
 
 function LoginPage(props) {
-  const {loggedIn, login} = props;
   const [showRegister,showRegisterForm] = useState(false);
 
   const toggleForm = function () {
@@ -21,7 +20,6 @@ function LoginPage(props) {
       <div className="login-left-container">
         { !showRegister ? ( 
           <LogInForm 
-            login={login}
             parentCallback={toggleForm}
           /> 
           ) : ( 

@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react'
 import {useParams} from 'react-router-dom';
 import axios from 'axios'
-import { refreshToken } from '../helper'
+import { refreshToken } from '../helpers/helper'
 import '../styles/views/Profile.scss'
 
 function Profile() {

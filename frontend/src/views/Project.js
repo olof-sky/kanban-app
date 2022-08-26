@@ -8,7 +8,7 @@ import TaskCardSmall from '../components/TaskCardSmall'
 import TaskCard from '../components/TaskCard'
 import { BsSearch } from 'react-icons/bs';
 import '../styles/views/Project.scss'
-import { refreshToken } from '../helper'
+import { refreshToken } from '../helpers/helper'
 
 function Project() {
 const [project,setProject] = useState([]);

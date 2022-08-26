@@ -1,0 +1,68 @@
+@import '../styles.scss';
+
+.navbar {
+    background-color: #c9d6c8;
+    height: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 30px;
+    background-color: $offset-white;
+    box-shadow: $main-box-shadow;
+
+    .navbar-left-side {
+      display: flex;
+      align-items: center;
+      
+      #menu-button {
+        padding: 5px;
+      }
+      #menu-button:hover {
+        cursor: pointer;
+        background-color: $light-grey;
+      }
+
+      .navbar-links {
+        display: flex;
+        margin-left: 20px;
+        .link{
+          border-bottom: 3px solid transparent;
+        }
+
+        .active {
+          border-bottom: 3px solid $main-dark-green;
+        }
+
+        a {
+            padding: 10px 0 10px 0;
+            text-decoration: none;
+            color: inherit;
+          }
+
+        a:hover {
+          background-color: $light-grey;
+          text-decoration: none;
+        }
+
+        p {  
+          margin: 0 20px 0 20px;
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .navbar-right-side {
+      display: flex;
+      align-items: center;
+      
+      #logout-button {
+        padding: 5px;
+      }
+      #logout-button:hover {
+        cursor: pointer;
+        background-color: $light-grey;
+      }
+    }
+  }
