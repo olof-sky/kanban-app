@@ -5,7 +5,7 @@ import RegisterForm from './RegisterForm'
 
 import '../../styles/views/LoginPage.scss'
 
-function LoginPage(props) {
+function LoginPage() {
   const [showRegister,showRegisterForm] = useState(false);
 
   const toggleForm = function () {

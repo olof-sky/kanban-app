@@ -1,6 +1,10 @@
 import React, {useState} from "react"
+import axios from 'axios'
 import { useAuth } from '../../context/AuthContext'
 import '../../styles/views/LoginPage.scss'
+
+const { user, loggedIn, logout, getLoggedInUser } = useAuth;
+const validator = require("email-validator");
 
 function LogInForm (props) {
   const {parentCallback} = props;
@@ -8,8 +12,41 @@ function LogInForm (props) {
   const [password,setPassword] = useState("");
   const [isEmailError,setIsEmailError] = useState([false, ""]);
   const [isPasswordError,setIsPasswordError] = useState([false, ""]);
-  
-  const login = useAuth.login;
+
+  async function login() {
+    resetErrors()
+    let isError = false
+    if(!validator.validate(email)) ( setIsEmailError([true, `Email is not valid`]), setEmail(""));
+    if (!email) ( setIsEmailError([true, "Email is empty"]), isError = true);
+    if (!password) ( setIsPasswordError([true, "Password is empty"]), isError = true);
+    if(isError) return;
+
+    try {
+      const resp = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, 
+      { email: email, password: password }
+      )
+      if (resp) {
+        let token = resp.headers.authorization;
+        let refreshToken = resp.headers['refresh-token'];
+        sessionStorage.setItem('Token', token);
+        sessionStorage.setItem('Refresh-Token', refreshToken);
+        axios.defaults.headers.common['Authorization'] = token;
+        axios.defaults.headers.common['Refresh-Token'] = refreshToken;
+        getLoggedInUser;
+      }
+    }
+    catch(err) {
+      console.log(err)
+      if(err.response.data.EmailError) {
+        setIsEmailError([true, err.response.data.EmailError])
+        setEmail("");
+      }
+      if(err.response.data.PasswordError) {
+        setIsPasswordError([true, err.response.data.PasswordError]);
+        setPassword("");
+      }
+    }
+  }
 
   const toggleForm = () => {
     resetErrors()
