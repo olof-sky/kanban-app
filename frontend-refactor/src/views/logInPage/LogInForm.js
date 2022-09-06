@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useAuth } from '../../context/AuthContext'
 import '../../styles/views/LoginPage.scss'
 
-const { user, loggedIn, logout, getLoggedInUser } = useAuth;
+const { logout, getLoggedInUser } = useAuth;
 const validator = require("email-validator");
 
 function LogInForm (props) {
@@ -32,6 +32,7 @@ function LogInForm (props) {
         sessionStorage.setItem('Refresh-Token', refreshToken);
         axios.defaults.headers.common['Authorization'] = token;
         axios.defaults.headers.common['Refresh-Token'] = refreshToken;
+        console.log("getLoggedInUser")
         getLoggedInUser;
       }
     }
